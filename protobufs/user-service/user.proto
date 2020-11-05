@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc AddUser (AddUserDto) returns (IsOk) {}
+}
+
+message AddUserDto {
+  string name = 1;
+  string mail = 2;
+  string tag = 3;
+}
+
+message IsOk {
+  string ok = 1;
+}
