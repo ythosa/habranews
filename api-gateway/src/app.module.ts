@@ -6,7 +6,6 @@ import { configModule } from './configure.root';
 @Module({
     imports: [
         SubscriptionModule,
-
         configModule
     ],
 })
