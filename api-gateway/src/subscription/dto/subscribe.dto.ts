@@ -1,14 +1,14 @@
-import {IsEmail, IsEnum, IsNotEmpty, Matches} from 'class-validator';
-import {tagEnum} from '../enums/tag.enum';
+import { IsEmail, IsEnum, IsNotEmpty, Matches } from 'class-validator';
+import { tagEnum } from '../enums/tag.enum';
 
 export class SubscribeDto {
     @IsNotEmpty()
-    name: string
+    name: string;
 
     @IsNotEmpty()
     @IsEmail()
-    mail: string
+    mail: string;
 
     @IsEnum(tagEnum)
-    tag: string
+    tag: string;
 }

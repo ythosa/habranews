@@ -4,9 +4,6 @@ import { SubscriptionModule } from './subscription/subscription.module';
 import { configModule } from './configure.root';
 
 @Module({
-    imports: [
-        SubscriptionModule,
-        configModule
-    ],
+    imports: [SubscriptionModule, configModule],
 })
 export class AppModule {}
