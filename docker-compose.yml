@@ -42,4 +42,5 @@ volumes:
 
 networks:
   habranews:
-    external: true
+    # external: true
+    driver: bridge

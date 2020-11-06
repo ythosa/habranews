@@ -3,7 +3,6 @@ import { SubscriptionService } from './subscription.service';
 import { SubscriptionController } from './subscription.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join, resolve } from 'path';
-import * as grpc from "grpc";
 
 @Module({
     providers: [SubscriptionService],

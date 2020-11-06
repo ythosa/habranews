@@ -1,10 +1,11 @@
-import {Inject, Injectable, Logger, OnModuleInit} from '@nestjs/common';
+import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 
-import {SubscribeDto} from './dto/subscribe.dto';
-import {ClientGrpc} from '@nestjs/microservices';
-import {IUserService} from './interfaces/user-service.interface';
-import {AddUserDto} from './interfaces/add-user.dto';
+import { SubscribeDto } from './dto/subscribe.dto';
+import { ClientGrpc } from '@nestjs/microservices';
+import { IUserService } from './interfaces/user-service.interface';
+import { AddUserDto } from './interfaces/add-user.dto';
 import { IUser } from './interfaces/user.interface';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class SubscriptionService implements OnModuleInit {
@@ -18,17 +19,17 @@ export class SubscriptionService implements OnModuleInit {
         this.userService = this.client.getService<IUserService>('UserService');
     }
 
-    async subscribe(subscribeDto: SubscribeDto): Promise<void> {
+    subscribe(subscribeDto: SubscribeDto): Observable<IUser> {
         this.logger.log(
             `Subscribing with data: ${JSON.stringify(subscribeDto)}`,
         );
-        await this.addUser(subscribeDto as AddUserDto);
+        return this.addUser(subscribeDto as AddUserDto);
     }
 
     // private async makeTagCheckable(): Promise<void> {}
 
-    private async addUser(addUserDto: AddUserDto): Promise<IUser> {
+    private addUser(addUserDto: AddUserDto): Observable<IUser> {
         this.logger.log(`Adding user with data: ${JSON.stringify(addUserDto)}`);
-        return this.userService.addUser(addUserDto).toPromise();
+        return this.userService.addUser(addUserDto);
     }
 }
