@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { join, resolve } from 'path';
 import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
     const logger = new Logger(bootstrap.name);
@@ -21,6 +22,8 @@ async function bootstrap() {
             },
         },
     );
+
+    logger.log(process.env);
 
     await app.listen(() => logger.log('User Service is started!'));
 }

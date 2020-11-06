@@ -7,6 +7,9 @@ async function bootstrap() {
 
     const app = await NestFactory.create(AppModule);
     await app.listen(process.env.PORT);
+
+    logger.log(process.env);
+
     logger.log('Api Gateway is started!');
 }
 bootstrap();
