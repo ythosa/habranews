@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 
 services:
   api-gateway:
@@ -20,6 +20,8 @@ services:
     container_name: user-service
     command: npm run start
     restart: unless-stopped
+    expose: 
+      - "50051"
     volumes:
       - ./protobufs:/usr/src/protobufs
     networks:
@@ -32,8 +34,8 @@ services:
       - "5433:5433"
     env_file: 
       - ./user-service-db/postgresql.env
-    # volumes: 
-    #   - user-service-db-volume:/var/lib/postgresql/data
+    volumes: 
+      - user-service-db-volume:/var/lib/postgresql/data
     networks: 
       - habranews
 
@@ -42,5 +44,4 @@ volumes:
 
 networks:
   habranews:
-    # external: true
     driver: bridge
