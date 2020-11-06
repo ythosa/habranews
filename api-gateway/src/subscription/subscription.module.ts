@@ -20,7 +20,7 @@ import * as grpc from "grpc";
                         'protobufs/user-service/user.proto',
                     ),
                     url: process.env.USER_SERVICE_URL,
-                    credentials: grpc.credentials.createInsecure()
+                    // credentials: grpc.credentials.createInsecure()
                 },
             },
         ]),

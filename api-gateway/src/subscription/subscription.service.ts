@@ -10,7 +10,7 @@ import { IUser } from './interfaces/user.interface';
 export class SubscriptionService implements OnModuleInit {
     private logger = new Logger(SubscriptionService.name);
 
-    private userService: any;
+    private userService: IUserService;
 
     constructor(@Inject('USER_PACKAGE') private client: ClientGrpc) {}
 

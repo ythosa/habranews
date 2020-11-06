@@ -10,7 +10,7 @@ export class UserController {
 
     constructor(private readonly userService: UserService) {}
 
-    @GrpcMethod('UserService', 'AddUser')
+    @GrpcMethod('UserService')
     async addUser(addUserDto: AddUserDto): Promise<IUser> {
         this.logger.log(`Adding user with data: ${JSON.stringify(addUserDto)}`);
 
