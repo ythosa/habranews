@@ -12,14 +12,14 @@ services:
       - "3001:3001"
     networks:
       - habranews
+    depends_on: 
+      - user-service
 
   user-service:
     build: ./user-service
     container_name: user-service
     command: npm run start
     restart: unless-stopped
-    expose:
-      - "5000"
     volumes:
       - ./protobufs:/usr/src/protobufs
     networks:
@@ -40,4 +40,4 @@ volumes:
 
 networks:
   habranews:
-    driver: bridge
+    external: true

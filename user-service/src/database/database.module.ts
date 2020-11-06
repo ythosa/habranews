@@ -6,14 +6,14 @@ import { TypeOrmModule } from "@nestjs/typeorm";
     imports: [
         TypeOrmModule.forRootAsync({
             useFactory: (configService: ConfigService) => ({
-                type: 'postgres',
+                type: configService.get<any>("DBTYPE"),
                 host: configService.get<string>("DBHOST"),
                 port: configService.get<number>("PGPORT"),
                 username: configService.get<string>("PGUSER"),
                 password: configService.get<string>("PGPASSWORD"),
                 database: configService.get<string>("PGDATABASE"),
                 entities: [__dirname + '/../**/*.entity.{js,ts}'],
-                synchronize: Boolean(configService.get("DBSYNCHRONIZE")),
+                synchronize: configService.get<boolean>("DBSYNCHRONIZE"),
             }),
             inject: [ConfigService]
         })

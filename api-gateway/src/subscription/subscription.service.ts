@@ -23,8 +23,6 @@ export class SubscriptionService implements OnModuleInit {
             `Subscribing with data: ${JSON.stringify(subscribeDto)}`,
         );
         await this.addUser(subscribeDto as AddUserDto);
-
-        return;
     }
 
     // private async makeTagCheckable(): Promise<void> {}

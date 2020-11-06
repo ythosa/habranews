@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { join, resolve } from 'path';
 import { Logger } from '@nestjs/common';
+import * as grpc from "grpc"
 
 async function bootstrap() {
     const logger = new Logger(bootstrap.name);
@@ -18,6 +19,7 @@ async function bootstrap() {
                     'protobufs/user-service/user.proto',
                 ),
                 url: `0.0.0.0:${process.env.PORT}`,
+                credentials: grpc.ServerCredentials.createInsecure()
             },
         },
     );

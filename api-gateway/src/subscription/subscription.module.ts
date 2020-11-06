@@ -3,6 +3,7 @@ import { SubscriptionService } from './subscription.service';
 import { SubscriptionController } from './subscription.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join, resolve } from 'path';
+import * as grpc from "grpc";
 
 @Module({
     providers: [SubscriptionService],
@@ -19,6 +20,7 @@ import { join, resolve } from 'path';
                         'protobufs/user-service/user.proto',
                     ),
                     url: process.env.USER_SERVICE_URL,
+                    credentials: grpc.credentials.createInsecure()
                 },
             },
         ]),
