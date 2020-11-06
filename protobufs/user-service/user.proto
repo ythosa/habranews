@@ -3,7 +3,7 @@ syntax = "proto3";
 package user;
 
 service UserService {
-  rpc AddUser (AddUserDto) returns (IsOk) {}
+  rpc AddUser (AddUserDto) returns (User) {}
 }
 
 message AddUserDto {
@@ -12,6 +12,8 @@ message AddUserDto {
   string tag = 3;
 }
 
-message IsOk {
-  string ok = 1;
+message User {
+  string name = 1;
+  string mail = 2;
+  string tag = 3;
 }

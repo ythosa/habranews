@@ -31,6 +31,7 @@
     "@nestjs/typeorm": "^7.1.4",
     "grpc": "^1.24.3",
     "node-gyp": "^7.1.2",
+    "pg": "^8.4.2",
     "postgresql": "0.0.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

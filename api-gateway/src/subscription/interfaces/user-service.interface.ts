@@ -1,6 +1,6 @@
 import { AddUserDto } from './add-user.dto';
-import { IIsOk } from './is-ok.interface';
+import { IUser } from './user.interface';
 
 export interface IUserService {
-    addUser(addUserDto: AddUserDto): Promise<IIsOk>;
+    addUser(addUserDto: AddUserDto): Promise<IUser>;
 }

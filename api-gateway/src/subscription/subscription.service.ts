@@ -4,7 +4,7 @@ import {SubscribeDto} from './dto/subscribe.dto';
 import {ClientGrpc} from '@nestjs/microservices';
 import {IUserService} from './interfaces/user-service.interface';
 import {AddUserDto} from './interfaces/add-user.dto';
-import {IIsOk} from './interfaces/is-ok.interface';
+import { IUser } from './interfaces/user.interface';
 
 @Injectable()
 export class SubscriptionService implements OnModuleInit {
@@ -29,7 +29,7 @@ export class SubscriptionService implements OnModuleInit {
 
     // private async makeTagCheckable(): Promise<void> {}
 
-    private async addUser(addUserDto: AddUserDto): Promise<IIsOk> {
+    private async addUser(addUserDto: AddUserDto): Promise<IUser> {
         this.logger.log(`Adding user with data: ${JSON.stringify(addUserDto)}`);
         return this.userService.addUser(addUserDto).toPromise();
     }
