@@ -1,10 +1,10 @@
-import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import {Inject, Injectable, Logger, OnModuleInit} from '@nestjs/common';
 
-import { SubscribeDto } from './dto/subscribe.dto';
-import { ClientGrpc } from '@nestjs/microservices';
-import { IUserService } from './interfaces/user-service.interface';
-import { AddUserDto } from './interfaces/add-user.dto';
-import { IIsOk } from './interfaces/is-ok.interface';
+import {SubscribeDto} from './dto/subscribe.dto';
+import {ClientGrpc} from '@nestjs/microservices';
+import {IUserService} from './interfaces/user-service.interface';
+import {AddUserDto} from './interfaces/add-user.dto';
+import {IIsOk} from './interfaces/is-ok.interface';
 
 @Injectable()
 export class SubscriptionService implements OnModuleInit {
@@ -31,7 +31,6 @@ export class SubscriptionService implements OnModuleInit {
 
     private async addUser(addUserDto: AddUserDto): Promise<IIsOk> {
         this.logger.log(`Adding user with data: ${JSON.stringify(addUserDto)}`);
-        const result = await this.userService.addUser(addUserDto).toPromise();
-        return result;
+        return this.userService.addUser(addUserDto).toPromise();
     }
 }

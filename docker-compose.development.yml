@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  api-gateway:
+    command: npm run start:dev
+
+  user-service:
+    command: npm run start:dev
