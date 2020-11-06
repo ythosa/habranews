@@ -19,7 +19,6 @@ import { join, resolve } from 'path';
                         'protobufs/user-service/user.proto',
                     ),
                     url: process.env.USER_SERVICE_URL,
-                    // credentials: grpc.credentials.createInsecure()
                 },
             },
         ]),
