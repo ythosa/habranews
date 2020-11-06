@@ -18,6 +18,7 @@ import { join, resolve } from 'path';
                         resolve(process.cwd(), '..'),
                         'protobufs/user-service/user.proto',
                     ),
+                    url: process.env.USER_SERVICE_URL,
                 },
             },
         ]),

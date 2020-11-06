@@ -17,7 +17,7 @@ async function bootstrap() {
                     resolve(process.cwd(), '..'),
                     'protobufs/user-service/user.proto',
                 ),
-                url: 'localhost:5000',
+                url: `0.0.0.0:${process.env.PORT}`,
             },
         },
     );

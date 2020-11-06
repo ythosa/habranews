@@ -18,6 +18,8 @@ services:
     container_name: user-service
     command: npm run start
     restart: unless-stopped
+    expose:
+      - "5000"
     volumes:
       - ./protobufs:/usr/src/protobufs
     networks:
