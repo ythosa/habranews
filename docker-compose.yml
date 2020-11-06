@@ -25,6 +25,19 @@ services:
     networks:
       - habranews
 
+  user-service-db:
+    container_name: user-service-db
+    image: postgres
+    env_file: 
+      - ./user-service-db/postgresql.env
+    volumes: 
+      - user-service-db-volume:/var/lib/postgresql/data
+    networks: 
+      - habranews
+
+volumes:
+  user-service-db-volume:
+
 networks:
   habranews:
     driver: bridge
