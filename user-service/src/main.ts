@@ -6,8 +6,6 @@ import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
     const logger = new Logger(bootstrap.name);
-    console.log(process.env.PORT);
-    const url = `0.0.0.0:${process.env.PORT}`;
 
     const app = await NestFactory.createMicroservice(
         AppModule,
@@ -19,7 +17,7 @@ async function bootstrap() {
                     resolve(process.cwd(), '..'),
                     'protobufs/user-service/user.proto',
                 ),
-                url,
+                url: `0.0.0.0:${process.env.PORT}`,
             },
         },
     );
