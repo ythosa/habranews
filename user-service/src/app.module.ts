@@ -5,6 +5,10 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-    imports: [TypeOrmModule.forRoot(typeOrmConfig), UserModule, configModule],
+    imports: [
+        TypeOrmModule.forRoot(typeOrmConfig),
+        UserModule,
+        configModule
+    ],
 })
 export class AppModule {}

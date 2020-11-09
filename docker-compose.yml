@@ -20,8 +20,6 @@ services:
     container_name: user-service
     command: npm run start
     restart: unless-stopped
-    expose: 
-      - "50051"
     volumes:
       - ./protobufs:/usr/src/protobufs
     networks:
