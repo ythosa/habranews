@@ -1,4 +1,3 @@
-import { type } from 'os';
 import {
     BaseEntity,
     Column,
@@ -8,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-@Unique(['name'])
+@Unique(['mail'])
 export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
@@ -19,6 +18,6 @@ export class User extends BaseEntity {
     @Column({ type: 'varchar' })
     mail: string;
 
-    @Column({type: 'simple-array', default: [] })
+    @Column({ type: 'simple-array', default: [] })
     tags: string[];
 }

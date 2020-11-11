@@ -20,10 +20,10 @@ import { ConfigService } from '@nestjs/config';
                             resolve(process.cwd(), '..'),
                             'protobufs/user-service/user.proto',
                         ),
-                        url: configService.get<string>("USER_SERVICE_URL"),
+                        url: configService.get<string>('USER_SERVICE_URL'),
                     },
                 }),
-                inject: [ConfigService]
+                inject: [ConfigService],
             },
         ]),
     ],

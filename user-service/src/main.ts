@@ -7,20 +7,17 @@ import { Logger } from '@nestjs/common';
 async function bootstrap() {
     const logger = new Logger(bootstrap.name);
 
-    const app = await NestFactory.createMicroservice(
-        AppModule,
-        {
-            transport: Transport.GRPC,
-            options: {
-                package: 'user',
-                protoPath: join(
-                    resolve(process.cwd(), '..'),
-                    'protobufs/user-service/user.proto',
-                ),
-                url: `0.0.0.0:${process.env.PORT}`,
-            },
+    const app = await NestFactory.createMicroservice(AppModule, {
+        transport: Transport.GRPC,
+        options: {
+            package: 'user',
+            protoPath: join(
+                resolve(process.cwd(), '..'),
+                'protobufs/user-service/user.proto',
+            ),
+            url: `0.0.0.0:${process.env.PORT}`,
         },
-    );
+    });
 
     await app.listen(() => logger.log('User Service is started!'));
 }

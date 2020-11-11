@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Logger, Post, ValidationPipe } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    Logger,
+    Post,
+    ValidationPipe,
+} from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { SubscribeDto } from './dto/subscribe.dto';
 import { SubscriptionService } from './subscription.service';
@@ -14,7 +21,7 @@ export class SubscriptionController {
         @Body(ValidationPipe) subscribeDto: SubscribeDto,
     ): Observable<any> {
         this.logger.log(
-            `Subscribing with data: ${JSON.stringify(subscribeDto)}`
+            `Subscribing with data: ${JSON.stringify(subscribeDto)}`,
         );
 
         return this.subscriptionService.subscribe(subscribeDto);
