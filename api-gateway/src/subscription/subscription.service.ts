@@ -23,6 +23,7 @@ export class SubscriptionService implements OnModuleInit {
         this.logger.log(
             `Subscribing with data: ${JSON.stringify(subscribeDto)}`,
         );
+        
         return this.addUser(subscribeDto as AddUserDto);
     }
 
@@ -30,6 +31,7 @@ export class SubscriptionService implements OnModuleInit {
 
     private addUser(addUserDto: AddUserDto): Observable<IUser> {
         this.logger.log(`Adding user with data: ${JSON.stringify(addUserDto)}`);
+
         return this.userService.addUser(addUserDto);
     }
 }

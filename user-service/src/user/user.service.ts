@@ -17,7 +17,7 @@ export class UserService {
         });
 
         if (user) {
-            return this.patchUserTag(user, addUserDto.tag);
+            return this.patchUserTag(user, addUserDto.tags);
         }
 
         return this.createNewUserFromAddUserDto(addUserDto);
@@ -28,15 +28,15 @@ export class UserService {
     ): Promise<User> {
         const user = new User();
         user.mail = addUserDto.mail;
-        user.tag = addUserDto.tag;
+        user.tags = addUserDto.tags;
         user.name = addUserDto.name;
         await this.userRepository.save([addUserDto]);
 
         return user;
     }
 
-    private async patchUserTag(user: User, tag: string): Promise<User> {
-        user.tag = tag;
+    private async patchUserTag(user: User, tags: string[]): Promise<User> {
+        user.tags = Array.from(new Set(user.tags.concat(tags)));
         await this.userRepository.update(user.id, user);
 
         return user;

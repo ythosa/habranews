@@ -1,5 +1,7 @@
-import { IsEmail, IsEnum, IsNotEmpty, Matches } from 'class-validator';
+import { Type } from 'class-transformer';
+import { ArrayMinSize, IsDefined, IsEmail, IsEnum, IsNotEmpty, Matches } from 'class-validator';
 import { tagEnum } from '../enums/tag.enum';
+import { IsValidTags } from '../validators/tags.validator';
 
 export class SubscribeDto {
     @IsNotEmpty()
@@ -9,6 +11,9 @@ export class SubscribeDto {
     @IsEmail()
     mail: string;
 
-    @IsEnum(tagEnum)
-    tag: string;
+    @ArrayMinSize(1)
+    // @IsValidTags()
+    @IsEnum(tagEnum, { each: true })
+    @IsDefined()
+    tags: string[];
 }

@@ -9,11 +9,11 @@ service UserService {
 message AddUserDto {
   string name = 1;
   string mail = 2;
-  string tag = 3;
+  repeated string tags = 3;
 }
 
 message User {
   string name = 1;
   string mail = 2;
-  string tag = 3;
+  repeated string tags = 3;
 }

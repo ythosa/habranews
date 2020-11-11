@@ -1,3 +1,4 @@
+import { type } from 'os';
 import {
     BaseEntity,
     Column,
@@ -12,12 +13,12 @@ export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ type: 'varchar' })
     name: string;
 
-    @Column()
+    @Column({ type: 'varchar' })
     mail: string;
 
-    @Column()
-    tag: string;
+    @Column({type: 'simple-array', default: [] })
+    tags: string[];
 }
