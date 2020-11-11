@@ -28,8 +28,6 @@ services:
   user-service-db:
     container_name: user-service-db
     image: postgres
-    ports: 
-      - "5433:5433"
     env_file: 
       - ./user-service-db/postgresql.env
     volumes: 
@@ -37,8 +35,31 @@ services:
     networks: 
       - habranews
 
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    command: npm run start
+    restart: unless-stopped
+    volumes:
+      - ./protobufs:/usr/src/protobufs
+    networks:
+      - habranews
+
+  auth-service-db:
+    container_name: auth-service-db
+    image: redis:6.0.9-alpine
+    environment:
+     - REDIS_REPLICATION_MODE=master
+    volumes:
+      - auth-service-db-data-volume:/var/lib/redis
+      - auth-service-db-cfg-volume:/usr/local/etc/redis/redis.conf
+    networks: 
+      - habranews
+
 volumes:
   user-service-db-volume:
+  auth-service-db-data-volume:
+  auth-service-db-cfg-volume:
 
 networks:
   habranews:
