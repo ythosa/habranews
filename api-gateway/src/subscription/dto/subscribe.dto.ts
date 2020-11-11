@@ -1,6 +1,4 @@
-import { Type } from 'class-transformer';
 import { ArrayMinSize, IsDefined, IsEmail, IsEnum, IsNotEmpty, Matches } from 'class-validator';
-import { tagEnum } from '../enums/tag.enum';
 import { IsValidTags } from '../validators/tags.validator';
 
 export class SubscribeDto {
@@ -13,7 +11,5 @@ export class SubscribeDto {
 
     @ArrayMinSize(1)
     @IsValidTags({ message: "unknown tag name" })
-    // @IsEnum(tagEnum, { each: true })
-    // @IsDefined()
     tags: string[];
 }

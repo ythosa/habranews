@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post, ValidationPipe } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { SubscribeDto } from './dto/subscribe.dto';
 import { SubscriptionService } from './subscription.service';
