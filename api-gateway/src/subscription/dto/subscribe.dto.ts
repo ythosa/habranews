@@ -12,8 +12,8 @@ export class SubscribeDto {
     mail: string;
 
     @ArrayMinSize(1)
-    // @IsValidTags()
-    @IsEnum(tagEnum, { each: true })
-    @IsDefined()
+    @IsValidTags({ message: "unknown tag name" })
+    // @IsEnum(tagEnum, { each: true })
+    // @IsDefined()
     tags: string[];
 }
