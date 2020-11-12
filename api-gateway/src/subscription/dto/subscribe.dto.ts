@@ -1,11 +1,4 @@
-import {
-    ArrayMinSize,
-    IsDefined,
-    IsEmail,
-    IsEnum,
-    IsNotEmpty,
-    Matches,
-} from 'class-validator';
+import { ArrayMinSize, IsEmail, IsNotEmpty } from 'class-validator';
 import { IsValidTags } from '../validators/tags.validator';
 
 export class SubscribeDto {
