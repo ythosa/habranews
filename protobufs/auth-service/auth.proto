@@ -3,11 +3,12 @@ syntax = "proto3";
 package auth;
 
 service AuthService {
-    rpc Generate(GenerateTokensDto) returns (Tokens)
+    rpc Verify(GenerateTokensDto) returns (User)
 }
 
 message GenerateTokensDto {
-    int32 id = 1;
+    string mail = 1;
+    string password = 2;
 }
 
 message Tokens {

@@ -1,3 +1,4 @@
 export class GenerateTokensDto {
-    id: number;
+    mail: string;
+    password: string;
 }

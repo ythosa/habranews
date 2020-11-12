@@ -4,7 +4,7 @@ package user;
 
 service UserService {
   rpc AddUser (AddUserDto) returns (User) {}
-  rpc GetUserById (GetUserByIdDto) returns (User) {}
+  rpc GetUserByMail (GetUserByMailDto) returns (User) {}
 }
 
 message AddUserDto {
@@ -14,11 +14,12 @@ message AddUserDto {
 }
 
 message User {
-  string name = 1;
-  string mail = 2;
-  repeated string tags = 3;
+  string mail = 1;
+  string password = 2;
+  string name = 3;
+  repeated string tags = 4;
 }
 
-message GetUserByIdDto {
-  int32 id = 1;
+message GetUserByMailDto {
+  string mail = 1;
 }

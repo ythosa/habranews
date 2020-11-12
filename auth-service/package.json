@@ -32,7 +32,9 @@
     "@nestjs/typeorm": "^7.1.4",
     "class-validator": "^0.12.2",
     "grpc": "^1.24.4",
+    "nestjs-redis": "^1.2.8",
     "passport-jwt": "^4.0.0",
+    "redis": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3"
