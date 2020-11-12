@@ -1,6 +1,6 @@
 import { Controller, Logger } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { GenerateTokenDto } from './dto/generate-token.dto';
+import { GenerateTokensDto } from './dto/generate-token.dto';
 import { ITokens } from './interfaces/tokens.interface';
 import { TokenService } from './token.service';
 
@@ -11,7 +11,7 @@ export class TokenController {
     constructor(private readonly tokenService: TokenService) {}
 
     @GrpcMethod('AuthService')
-    async generate(generateTokensDto: GenerateTokenDto): Promise<ITokens> {
+    async generate(generateTokensDto: GenerateTokensDto): Promise<ITokens> {
         this.logger.log(
             `Generation tokens with data: ${JSON.stringify(generateTokensDto)}`,
         );

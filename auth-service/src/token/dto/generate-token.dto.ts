@@ -1,3 +1,3 @@
-export class GenerateTokenDto {
+export class GenerateTokensDto {
     id: number;
 }
