@@ -5,20 +5,20 @@ import { join, resolve } from 'path';
 import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
-  const logger = new Logger(bootstrap.name);
+    const logger = new Logger(bootstrap.name);
 
-  const app = await NestFactory.createMicroservice(AppModule, {
-    transport: Transport.GRPC,
-    options: {
-      package: 'auth',
-      protoPath: join(
-        resolve(process.cwd(), '..'),
-        'protobufs/auth-service/auth.proto',
-      ),
-      url: `0.0.0.0:${process.env.PORT}`,
-    },
-  });
+    const app = await NestFactory.createMicroservice(AppModule, {
+        transport: Transport.GRPC,
+        options: {
+            package: 'auth',
+            protoPath: join(
+                resolve(process.cwd(), '..'),
+                'protobufs/auth-service/auth.proto',
+            ),
+            url: `0.0.0.0:${process.env.PORT}`,
+        },
+    });
 
-  await app.listen(() => logger.log('User Service is started!'));
+    await app.listen(() => logger.log('User Service is started!'));
 }
 bootstrap();

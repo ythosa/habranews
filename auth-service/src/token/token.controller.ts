@@ -12,7 +12,9 @@ export class TokenController {
 
     @GrpcMethod('AuthService')
     async generate(generateTokensDto: GenerateTokenDto): Promise<ITokens> {
-        this.logger.log(`Generation tokens with data: ${JSON.stringify(generateTokensDto)}`);
+        this.logger.log(
+            `Generation tokens with data: ${JSON.stringify(generateTokensDto)}`,
+        );
 
         return this.tokenService.generateTokens(generateTokensDto);
     }
