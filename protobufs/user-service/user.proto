@@ -6,7 +6,7 @@ service UserService {
   rpc AddUser (User) returns () {};
   rpc ChangePassword (ChangePasswordDto) returns () {};
 
-  rpc PatchTags (Tags) returns () {};
+  rpc PatchTags (PatchTagsDto) returns () {};
   rpc PatchEmail (PatchEmailDto) returns () {};
   rpc PatchBio (PatchBioDto) returns () {};
 
@@ -43,6 +43,10 @@ message PatchBioDto {
   int32 userId = 1;
   string name = 2;
   string surname = 3;
+}
+message PatchTagsDto {
+  int32 userId = 1;
+  Tags tags = 2;
 }
 
 message GetUserByIdDto {
