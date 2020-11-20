@@ -7,6 +7,8 @@ import { ChangePasswordDto } from './dto/change-password.dto';
 import { PatchTagsDto } from './dto/patch-tags.dto';
 import { PatchEmailDto } from './dto/patch-email.dto';
 import { PatchBioDto } from './dto/patch-bio.dto';
+import { GetUserByIdDto } from './dto/get-user-by-id.dto';
+import { IUser } from './interfaces/user.interface';
 
 @Controller()
 export class UserController implements IUserService {
@@ -55,5 +57,14 @@ export class UserController implements IUserService {
         );
 
         return this.userService.patchBio(patchBioDto);
+    }
+
+    @GrpcMethod('UserService')
+    async getUserById(getUserByIdDto: GetUserByIdDto): Promise<IUser> {
+        this.logger.log(
+            `Getting user by id with data: ${JSON.stringify(getUserByIdDto)}`,
+        );
+
+        return this.userService.getUserById(getUserByIdDto);
     }
 }

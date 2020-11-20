@@ -2,9 +2,11 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AddUserDto } from './dto/add-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { GetUserByIdDto } from './dto/get-user-by-id.dto';
 import { PatchBioDto } from './dto/patch-bio.dto';
 import { PatchEmailDto } from './dto/patch-email.dto';
 import { PatchTagsDto } from './dto/patch-tags.dto';
+import { IUser } from './interfaces/user.interface';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 
@@ -57,5 +59,12 @@ export class UserService {
         user.surname = patchBioDto.surname;
 
         await this.userRepository.update(user.id, user);
+    }
+
+    async getUserById(getUserByIdDto: GetUserByIdDto): Promise<IUser> {
+        const user = await this.userRepository.findOne(getUserByIdDto.userId);
+        if (!user) throw new BadRequestException('Invalid userId'); 
+
+        return user;
     }
 }
