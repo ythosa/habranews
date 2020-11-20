@@ -3,23 +3,47 @@ syntax = "proto3";
 package user;
 
 service UserService {
-  rpc AddUser (AddUserDto) returns (User) {}
-  rpc GetUserByMail (GetUserByMailDto) returns (User) {}
-}
+  rpc AddUser (User) returns () {};
+  rpc ChangePassword (ChangePasswordDto) returns () {};
 
-message AddUserDto {
-  string name = 1;
-  string mail = 2;
-  repeated string tags = 3;
+  rpc PatchTags (Tags) returns () {};
+  rpc PatchEmail (PatchEmailDto) returns () {};
+  rpc PatchBio (PatchBioDto) returns () {};
+
+  rpc GetAvailableTags () returns (Tags) {};
+  rpc GetUserById (GetUserByIdDto) returns (User) {};
+  rpc GetUsersByTag (GetUsersByTagDto) returns (Users) {};
 }
 
 message User {
-  string mail = 1;
-  string password = 2;
-  string name = 3;
-  repeated string tags = 4;
+  string email = 1;
+  string hashedPassword = 2;
+  string salt = 3;
+  string name = 4;
+  string surname = 5;
+  repeated string tags = 6;
+}
+message Tags {
+  repeated string tags = 1; 
+}
+message Users {
+  repeated User users = 1;
 }
 
-message GetUserByMailDto {
-  string mail = 1;
+message ChangePasswordDto {
+  string password = 1;
+}
+message PatchEmailDto {
+  string email = 1;
+}
+message PatchBioDto {
+  string name = 1;
+  string surname = 2;
+}
+
+message GetUserByIdDto {
+  int32 id = 1;
+}
+message GetUsersByTagDto {
+  string tag = 1;
 }
