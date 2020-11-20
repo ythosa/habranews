@@ -4,6 +4,7 @@ import { AddUserDto } from './dto/add-user.dto';
 import { UserService } from './user.service';
 import { IUserService } from './interfaces/user-service.interface';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { PatchTagsDto } from './dto/patch-tags.dto';
 
 @Controller()
 export class UserController implements IUserService {
@@ -23,5 +24,12 @@ export class UserController implements IUserService {
         this.logger.log(`Chaging password with data: ${JSON.stringify(changePasswordDto)}`);
 
         return this.userService.changePassword(changePasswordDto);
+    }
+
+    @GrpcMethod('UserService')
+    async patchTags(patchTagsDto: PatchTagsDto): Promise<void> {
+        this.logger.log(`Patching tags with data: ${JSON.stringify(patchTagsDto)}`);
+
+        return this.userService.patchTags(patchTagsDto);
     }
 }

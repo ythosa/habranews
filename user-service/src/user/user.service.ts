@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AddUserDto } from './dto/add-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { PatchTagsDto } from './dto/patch-tags.dto';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 
@@ -20,6 +21,13 @@ export class UserService {
         const user = await this.userRepository.findOne(changePasswordDto.userId);
         user.hashedPassword = changePasswordDto.hashedPassword;
         user.salt = changePasswordDto.salt;
+
+        await this.userRepository.update(user.id, user);
+    }
+
+    async patchTags(patchTagsDto: PatchTagsDto): Promise<void> {
+        const user = await this.userRepository.findOne(patchTagsDto.userId);
+        user.tags = patchTagsDto.tags;
 
         await this.userRepository.update(user.id, user);
     }
