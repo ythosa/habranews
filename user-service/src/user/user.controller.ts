@@ -1,8 +1,9 @@
 import { Controller, Logger } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { AddUserDto } from './interfaces/add-user.dto';
+import { AddUserDto } from './dto/add-user.dto';
 import { UserService } from './user.service';
 import { IUserService } from './interfaces/user-service.interface';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Controller()
 export class UserController implements IUserService {
@@ -15,5 +16,12 @@ export class UserController implements IUserService {
         this.logger.log(`Adding user with data: ${JSON.stringify(addUserDto)}`);
 
         return this.userService.addUser(addUserDto);
+    }
+
+    @GrpcMethod('UserService')
+    async changePassword(changePasswordDto: ChangePasswordDto): Promise<void> {
+        this.logger.log(`Chaging password with data: ${JSON.stringify(changePasswordDto)}`);
+
+        return this.userService.changePassword(changePasswordDto);
     }
 }
