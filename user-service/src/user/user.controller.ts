@@ -6,6 +6,7 @@ import { IUserService } from './interfaces/user-service.interface';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { PatchTagsDto } from './dto/patch-tags.dto';
 import { PatchEmailDto } from './dto/patch-email.dto';
+import { PatchBioDto } from './dto/patch-bio.dto';
 
 @Controller()
 export class UserController implements IUserService {
@@ -22,22 +23,37 @@ export class UserController implements IUserService {
 
     @GrpcMethod('UserService')
     async changePassword(changePasswordDto: ChangePasswordDto): Promise<void> {
-        this.logger.log(`Chaging password with data: ${JSON.stringify(changePasswordDto)}`);
+        this.logger.log(
+            `Chaging password with data: ${JSON.stringify(changePasswordDto)}`,
+        );
 
         return this.userService.changePassword(changePasswordDto);
     }
 
     @GrpcMethod('UserService')
     async patchTags(patchTagsDto: PatchTagsDto): Promise<void> {
-        this.logger.log(`Patching tags with data: ${JSON.stringify(patchTagsDto)}`);
+        this.logger.log(
+            `Patching tags with data: ${JSON.stringify(patchTagsDto)}`,
+        );
 
         return this.userService.patchTags(patchTagsDto);
     }
 
     @GrpcMethod('UserService')
     async patchEmail(patchEmailDto: PatchEmailDto): Promise<void> {
-        this.logger.log(`Patching tags with data: ${JSON.stringify(patchEmailDto)}`);
+        this.logger.log(
+            `Patching email with data: ${JSON.stringify(patchEmailDto)}`,
+        );
 
         return this.userService.patchEmail(patchEmailDto);
+    }
+
+    @GrpcMethod('UserService')
+    async patchBio(patchBioDto: PatchBioDto): Promise<void> {
+        this.logger.log(
+            `Patching bio with data: ${JSON.stringify(patchBioDto)}`,
+        );
+
+        return this.userService.patchBio(patchBioDto);
     }
 }

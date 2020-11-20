@@ -1,4 +1,4 @@
-import { IsEmail, IsNumber } from "class-validator";
+import { IsEmail, IsNumber } from 'class-validator';
 
 export class PatchEmailDto {
     @IsNumber()

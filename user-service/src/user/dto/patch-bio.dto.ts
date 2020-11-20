@@ -1,12 +1,12 @@
 import { IsNumber, IsString } from 'class-validator';
 
-export class ChangePasswordDto {
+export class PatchBioDto {
     @IsNumber()
     userId: string;
 
     @IsString()
-    hashedPassword: string;
+    name: string;
 
     @IsString()
-    salt: string;
+    surname: string;
 }
