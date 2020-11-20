@@ -1,5 +1,8 @@
 export interface IUser {
+    email: string;
+    hashedPassword: string;
+    salt: string;
     name: string;
-    mail: string;
+    surname: string;
     tags: string[];
 }

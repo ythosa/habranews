@@ -11,9 +11,13 @@ export class UserService {
         private readonly userRepository: UserRepository,
     ) {}
 
+    async addUser(addUserDto: AddUserDto): Promise<void> {
+        this.userRepository.save([addUserDto]);
+    }
+
     async updateUserTags(addUserDto: AddUserDto): Promise<User> {
         const user = await this.userRepository.findOne({
-            where: { mail: addUserDto.mail },
+            where: { email: addUserDto.email },
         });
 
         if (user) {
@@ -27,7 +31,7 @@ export class UserService {
         addUserDto: AddUserDto,
     ): Promise<User> {
         const user = new User();
-        user.mail = addUserDto.mail;
+        user.email = addUserDto.email;
         user.tags = addUserDto.tags;
         user.name = addUserDto.name;
         await this.userRepository.save([addUserDto]);

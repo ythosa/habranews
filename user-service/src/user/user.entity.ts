@@ -14,21 +14,24 @@ export class User extends BaseEntity {
     id: number;
 
     @Column({ type: 'varchar' })
+    email: string;
+
+    @Column({ type: 'varchar' })
+    hashedPassword: string;
+
+    @Column({ type: 'varchar' })
+    salt: string;
+
+    @Column({ type: 'varchar' })
     name: string;
 
     @Column({ type: 'varchar' })
-    mail: string;
+    surname: string;
 
     @Column({ type: 'simple-array', default: [] })
     tags: string[];
 
-    @Column()
-    password: string;
-
-    @Column()
-    salt: string;
-
     async validatePassword(passwordHash: string): Promise<boolean> {
-        return bcrypt.compare(passwordHash, this.password);
+        return bcrypt.compare(passwordHash, this.hashedPassword);
     }
 }

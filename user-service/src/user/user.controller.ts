@@ -1,6 +1,5 @@
 import { Controller, Logger } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { IUser } from './interfaces/user.interface';
 import { AddUserDto } from './interfaces/add-user.dto';
 import { UserService } from './user.service';
 import { IUserService } from './interfaces/user-service.interface';
@@ -12,9 +11,9 @@ export class UserController implements IUserService {
     constructor(private readonly userService: UserService) {}
 
     @GrpcMethod('UserService')
-    async addUser(addUserDto: AddUserDto): Promise<IUser> {
+    async addUser(addUserDto: AddUserDto): Promise<void> {
         this.logger.log(`Adding user with data: ${JSON.stringify(addUserDto)}`);
 
-        return this.userService.updateUserTags(addUserDto);
+        return this.userService.addUser(addUserDto);
     }
 }
