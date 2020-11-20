@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { IUserService } from './interfaces/user-service.interface';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { PatchTagsDto } from './dto/patch-tags.dto';
+import { PatchEmailDto } from './dto/patch-email.dto';
 
 @Controller()
 export class UserController implements IUserService {
@@ -31,5 +32,12 @@ export class UserController implements IUserService {
         this.logger.log(`Patching tags with data: ${JSON.stringify(patchTagsDto)}`);
 
         return this.userService.patchTags(patchTagsDto);
+    }
+
+    @GrpcMethod('UserService')
+    async patchEmail(patchEmailDto: PatchEmailDto): Promise<void> {
+        this.logger.log(`Patching tags with data: ${JSON.stringify(patchEmailDto)}`);
+
+        return this.userService.patchEmail(patchEmailDto);
     }
 }
