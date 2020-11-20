@@ -31,14 +31,18 @@ message Users {
 }
 
 message ChangePasswordDto {
-  string password = 1;
+  int32 userId = 1;
+  string hashedPassword = 2;
+  string salt = 3;
 }
 message PatchEmailDto {
-  string email = 1;
+  int32 userId = 1;
+  string email = 2;
 }
 message PatchBioDto {
-  string name = 1;
-  string surname = 2;
+  int32 userId = 1;
+  string name = 2;
+  string surname = 3;
 }
 
 message GetUserByIdDto {
