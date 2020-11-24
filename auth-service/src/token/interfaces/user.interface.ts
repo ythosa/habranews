@@ -1,6 +1,8 @@
-export interface IUser {
-    mail: string;
-    password: string;
+export interface UserImpl {
+    email: string;
+    hashedPassword: string;
+    salt: string;
     name: string;
+    surname: string;
     tags: string[];
 }

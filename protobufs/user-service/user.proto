@@ -10,9 +10,8 @@ service UserService {
   rpc PatchEmail (PatchEmailDto) returns () {};
   rpc PatchBio (PatchBioDto) returns () {};
 
-  rpc GetAvailableTags () returns (Tags) {};
   rpc GetUserById (GetUserByIdDto) returns (User) {};
-  rpc GetUsersByTag (GetUsersByTagDto) returns (Users) {};
+  rpc GetUsersByTag (GetUsersByTagDto) returns (UsersInformationForMail) {};
 }
 
 message User {
@@ -23,11 +22,13 @@ message User {
   string surname = 5;
   repeated string tags = 6;
 }
-message Tags {
-  repeated string tags = 1; 
+message UserInformationForMail {
+  string email = 1;
+  string name = 2;
+  string surname = 3;
 }
-message Users {
-  repeated User users = 1;
+message UsersInformationForMail {
+  repeated UserInformationForMail users = 1;
 }
 
 message ChangePasswordDto {

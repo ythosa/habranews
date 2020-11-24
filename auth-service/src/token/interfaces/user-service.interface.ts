@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
-import { GetUserByIdDto } from './get-user-by-id.interface';
-import { IUser } from './user.interface';
+import { getUserByIdDtoImpl } from '../interfaces/get-user-by-id-dto.interface';
+import { UserImpl } from './user.interface';
 
-export interface IUserService {
-    getUserById(getUserByIdDto: GetUserByIdDto): Observable<IUser>;
+export interface UserServiceImpl {
+    getUserById(getUserByIdDto: getUserByIdDtoImpl): Observable<UserImpl>;
 }
