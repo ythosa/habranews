@@ -11,6 +11,7 @@ import { UserImpl } from './interfaces/user.interface';
 import { UserInformationForMailImpl } from './interfaces/user-information-for-mail';
 import { UserRepository } from './user.repository';
 import { User } from './user.entity';
+import { GetUserByEmailDto } from './dto/get-user-by-email.dto';
 
 @Injectable()
 export class UserService {
@@ -88,5 +89,19 @@ export class UserService {
         );
 
         return usersInfo;
+    }
+
+    async getUserByEmail(getUserByEmailDto: GetUserByEmailDto) {
+        const user = await this.userRepository.findOne({
+            where: {
+                email: getUserByEmailDto.email,
+            }
+        })
+
+        if (!user) {
+            new BadRequestException('Invalid email');
+        }
+
+        return user
     }
 }

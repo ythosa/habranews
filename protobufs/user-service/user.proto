@@ -10,6 +10,7 @@ service UserService {
   rpc PatchEmail (PatchEmailDto) returns () {};
   rpc PatchBio (PatchBioDto) returns () {};
 
+  rpc GetUserByEmail (GetUserByEmailDto) return (User) {};
   rpc GetUserById (GetUserByIdDto) returns (User) {};
   rpc GetUsersByTag (GetUsersByTagDto) returns (UsersInformationForMail) {};
 }
@@ -55,4 +56,7 @@ message GetUserByIdDto {
 }
 message GetUsersByTagDto {
   string tag = 1;
+}
+message GetUserByEmailDto {
+  string email = 1;
 }

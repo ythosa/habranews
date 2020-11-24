@@ -11,6 +11,7 @@ import { GetUserByIdDto } from './dto/get-user-by-id.dto';
 import { UserImpl } from './interfaces/user.interface';
 import { GetUsersByTagDto } from './dto/get-users-by-tag.dto';
 import { UserInformationForMailImpl } from './interfaces/user-information-for-mail';
+import { GetUserByEmailDto } from './dto/get-user-by-email.dto';
 
 @Controller()
 export class UserController implements UserServiceImpl {
@@ -76,10 +77,23 @@ export class UserController implements UserServiceImpl {
     ): Promise<UserInformationForMailImpl[]> {
         this.logger.log(
             `Getting users by tag with data: ${JSON.stringify(
-                GetUsersByTagDto,
+                getUsersByTagDto,
             )}`,
         );
 
         return this.userService.getUsersByTag(getUsersByTagDto);
+    }
+
+    @GrpcMethod('UserService')
+    async getUserByEmail(
+        getUserByEmailDto: GetUserByEmailDto,
+    ): Promise<UserImpl> {
+        this.logger.log(
+            `Getting user by email with data: ${JSON.stringify(
+                getUserByEmailDto,
+            )}`,
+        );
+
+        return this.userService.getUserByEmail(getUserByEmailDto);
     }
 }
