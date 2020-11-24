@@ -8,16 +8,15 @@ import { ConfigService } from '@nestjs/config';
 import { ClientGrpc } from '@nestjs/microservices';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-import { IUserService } from './interfaces/user-service.interface';
+import { UserServiceImpl } from './interfaces/user-service.interface';
 import { JwtPayload } from './jwt-payload.interface';
-import { Observable } from 'rxjs';
-import { IUser } from './interfaces/user.interface';
+import { UserIdImpl } from './interfaces/user.interface';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     private logger = new Logger(JwtStrategy.name);
 
-    private userService: IUserService;
+    private userService: UserServiceImpl;
 
     constructor(
         @Inject('USER_PACKAGE') private client: ClientGrpc,
@@ -30,16 +29,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     onModuleInit() {
-        this.userService = this.client.getService<IUserService>('UserService');
+        this.userService = this.client.getService<UserServiceImpl>('UserService');
     }
 
-    async validate(payload: JwtPayload): Promise<Observable<IUser>> {
+    async validate(payload: JwtPayload): Promise<UserIdImpl> {
         const { id } = payload;
         const user = this.userService.getUserById({ id });
         if (!user) {
             throw new UnauthorizedException();
         }
 
-        return user;
+        return { id };
     }
 }

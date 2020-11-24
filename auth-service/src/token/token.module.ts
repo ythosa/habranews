@@ -38,6 +38,7 @@ import { TokenController } from './token.controller';
                 },
             }),
             inject: [ConfigService],
+            imports: [],
         }),
     ],
     providers: [TokenService],
