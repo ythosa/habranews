@@ -5,7 +5,7 @@ import { GenerateTokensDto } from './dto/generate-token.dto';
 import { VerifyByAccessTokenDto } from './dto/verify-by-acess-token,dto';
 import { CryptedPasswordImpl } from './interfaces/crypted-password.interface';
 import { TokensImpl } from './interfaces/tokens.interface';
-import { UserIdImpl } from './interfaces/user.interface';
+import { UserIdImpl } from './interfaces/user-id.interface';
 import { TokenService } from './token.service';
 
 @Controller('token')
