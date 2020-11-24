@@ -3,7 +3,16 @@ syntax = "proto3";
 package auth;
 
 service AuthService {
-    rpc Verify(GenerateTokensDto) returns (User)
+    rpc VerifyByAccessToken(VerifyByAccessTokenDto) returns (UserId);
+    rpc Generate(GenerateTokensDto) returns (Tokens);
+    rpc CryptPassword(CryptPasswordDto) returns (CryptedPassword);
+}
+
+message VerifyByAccessTokenDto {
+    string accessToken = 1;
+}
+message UserId {
+    int32 userId = 1;
 }
 
 message GenerateTokensDto {
@@ -14,4 +23,17 @@ message GenerateTokensDto {
 message Tokens {
     string accessToken = 1;
     string refreshToken = 2;
+}
+
+message RegenerateTokensDto {
+    string refreshToken = 1;
+}
+
+message CryptPasswordDto {
+    string password = 1;
+}
+
+message CryptedPassword {
+    string hashedPassword = 1;
+    string salt = 2;
 }
