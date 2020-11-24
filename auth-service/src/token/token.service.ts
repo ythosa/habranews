@@ -8,6 +8,7 @@ import { UserIdImpl } from './interfaces/user-id.interface';
 import * as bcrypt from 'bcrypt';
 import { ClientGrpc } from '@nestjs/microservices';
 import { UserServiceImpl } from './interfaces/user-service.interface';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class TokenService {
@@ -15,7 +16,8 @@ export class TokenService {
 
     constructor(
         @Inject(CACHE_MANAGER) private refreshTokensManager: Cache,
-        @Inject('USER_PACKAGE') private client: ClientGrpc
+        @Inject('USER_PACKAGE') private client: ClientGrpc,
+        private jwtService: JwtService,
     ) {}
 
     onModuleInit() {
@@ -24,14 +26,23 @@ export class TokenService {
 
     async generateTokens(generateTokensDto: GenerateTokensDto): Promise<TokensImpl> {
         const { email, password } = generateTokensDto;
+
         const user = await this.userService.getUserByEmail({ email }).toPromise();
         if (!user) {
             throw new BadRequestException('Invalid email or password');
         }
 
-        // bcrypt.compare(user.)
+        const isValidPassword = await bcrypt.compare(password, user.hashedPassword);
+        if (!isValidPassword) {
+            throw new BadRequestException('Invalid email or password');
+        }
 
-        throw new Error('Method not implemented.');
+        const tokens: TokensImpl = {
+            accessToken: this.jwtService.sign({ id: user.id }), // todo: return from userService user id 
+            refreshToken: '', // todo: add refreshTokenJwtService 
+        }
+
+        return tokens
     }
 
     verifyByAccessToken(verifyByAccessTokenDto: VerifyByAccessTokenDto): Promise<UserIdImpl> {
