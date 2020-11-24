@@ -10,8 +10,8 @@ import { PatchTagsDto } from './dto/patch-tags.dto';
 import { UserImpl } from './interfaces/user.interface';
 import { UserInformationForMailImpl } from './interfaces/user-information-for-mail';
 import { UserRepository } from './user.repository';
-import { User } from './user.entity';
 import { GetUserByEmailDto } from './dto/get-user-by-email.dto';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
@@ -91,7 +91,7 @@ export class UserService {
         return usersInfo;
     }
 
-    async getUserByEmail(getUserByEmailDto: GetUserByEmailDto) {
+    async getUserByEmail(getUserByEmailDto: GetUserByEmailDto): Promise<UserImpl> {
         const user = await this.userRepository.findOne({
             where: {
                 email: getUserByEmailDto.email,

@@ -38,7 +38,7 @@ export class TokenService {
         }
 
         const tokens: TokensImpl = {
-            accessToken: this.jwtService.sign({ id: user.id }), // todo: return from userService user id 
+            accessToken: this.jwtService.sign({ id: user.id }),
             refreshToken: '', // todo: add refreshTokenJwtService 
         }
 
