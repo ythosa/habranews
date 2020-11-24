@@ -5,10 +5,10 @@ import { VerifyByAccessTokenDto } from './dto/verify-by-acess-token,dto';
 import { CryptedPasswordImpl } from './interfaces/crypted-password.interface';
 import { TokensImpl } from './interfaces/tokens.interface';
 import { UserIdImpl } from './interfaces/user.interface';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class TokenService {
-    
     generateTokens(generateTokensDto: GenerateTokensDto): Promise<TokensImpl> {
         throw new Error('Method not implemented.');
     }
