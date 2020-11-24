@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AddUserDto } from './dto/add-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { GetUserByIdDto } from './dto/get-user-by-id.dto';
+import { GetUsersByTagDto } from './dto/get-users-by-tag.dto';
 import { PatchBioDto } from './dto/patch-bio.dto';
 import { PatchEmailDto } from './dto/patch-email.dto';
 import { PatchTagsDto } from './dto/patch-tags.dto';
-import { IUser } from './interfaces/user.interface';
-import { User } from './user.entity';
+import { UserImpl } from './interfaces/user.interface';
+import { UserInformationForMailImpl } from './interfaces/user-information-for-mail';
 import { UserRepository } from './user.repository';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
@@ -61,10 +63,30 @@ export class UserService {
         await this.userRepository.update(user.id, user);
     }
 
-    async getUserById(getUserByIdDto: GetUserByIdDto): Promise<IUser> {
+    async getUserById(getUserByIdDto: GetUserByIdDto): Promise<UserImpl> {
         const user = await this.userRepository.findOne(getUserByIdDto.userId);
-        if (!user) throw new BadRequestException('Invalid userId'); 
+        if (!user) throw new BadRequestException('Invalid userId');
 
         return user;
+    }
+
+    async getUsersByTag(
+        getUsersByTagDto: GetUsersByTagDto,
+    ): Promise<UserInformationForMailImpl[]> {
+        const users = await this.userRepository
+            .createQueryBuilder('user')
+            .where(':tag = ANY user.tags', { tag: getUsersByTagDto.tag })
+            .getMany();
+
+        const usersInfo: UserInformationForMailImpl[] = [];
+        users.forEach((u) =>
+            usersInfo.push({
+                email: u.email,
+                name: u.name,
+                surname: u.surname,
+            }),
+        );
+
+        return usersInfo;
     }
 }

@@ -2,16 +2,18 @@ import { Controller, Logger } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { AddUserDto } from './dto/add-user.dto';
 import { UserService } from './user.service';
-import { IUserService } from './interfaces/user-service.interface';
+import { UserServiceImpl } from './interfaces/user-service.interface';
 import { ChangePasswordDto } from './dto/change-password.dto';
 import { PatchTagsDto } from './dto/patch-tags.dto';
 import { PatchEmailDto } from './dto/patch-email.dto';
 import { PatchBioDto } from './dto/patch-bio.dto';
 import { GetUserByIdDto } from './dto/get-user-by-id.dto';
-import { IUser } from './interfaces/user.interface';
+import { UserImpl } from './interfaces/user.interface';
+import { GetUsersByTagDto } from './dto/get-users-by-tag.dto';
+import { UserInformationForMailImpl } from './interfaces/user-information-for-mail';
 
 @Controller()
-export class UserController implements IUserService {
+export class UserController implements UserServiceImpl {
     private logger = new Logger(UserController.name);
 
     constructor(private readonly userService: UserService) {}
@@ -60,11 +62,24 @@ export class UserController implements IUserService {
     }
 
     @GrpcMethod('UserService')
-    async getUserById(getUserByIdDto: GetUserByIdDto): Promise<IUser> {
+    async getUserById(getUserByIdDto: GetUserByIdDto): Promise<UserImpl> {
         this.logger.log(
             `Getting user by id with data: ${JSON.stringify(getUserByIdDto)}`,
         );
 
         return this.userService.getUserById(getUserByIdDto);
+    }
+
+    @GrpcMethod('UserService')
+    async getUsersByTag(
+        getUsersByTagDto: GetUsersByTagDto,
+    ): Promise<UserInformationForMailImpl[]> {
+        this.logger.log(
+            `Getting users by tag with data: ${JSON.stringify(
+                GetUsersByTagDto,
+            )}`,
+        );
+
+        return this.userService.getUsersByTag(getUsersByTagDto);
     }
 }
