@@ -1,13 +1,13 @@
-<mxfile host="app.diagrams.net" modified="2020-11-20T13:37:54.311Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36" etag="mEihni841k-Ve_SBzI5k" version="13.9.6" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2020-11-24T16:10:20.797Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36 Edg/83.0.478.56" etag="9lQ2MtP1y-The-F-4V9O" version="13.10.0" type="github" pages="5">
   <diagram id="zYsj_GCrEN45drpil_GK" name="Architecture">
-    <mxGraphModel dx="1814" dy="2433" grid="1" gridSize="11" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1600" math="0" shadow="0">
+    <mxGraphModel dx="2774" dy="2438" grid="1" gridSize="11" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1600" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="8zO3fhM4Dob8OyOGSkkv-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="FwraS_gR7j-mOwSKwiUB-2" target="8zO3fhM4Dob8OyOGSkkv-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="8zO3fhM4Dob8OyOGSkkv-36" value="/submitTagsToCheck" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="8zO3fhM4Dob8OyOGSkkv-5" vertex="1" connectable="0">
+        <mxCell id="8zO3fhM4Dob8OyOGSkkv-36" value="/submitTagsToCheck&lt;br&gt;.getAvailableTags" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="8zO3fhM4Dob8OyOGSkkv-5" vertex="1" connectable="0">
           <mxGeometry x="-0.3241" y="1" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -15,7 +15,7 @@
         <mxCell id="8zO3fhM4Dob8OyOGSkkv-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="FwraS_gR7j-mOwSKwiUB-2" target="FwraS_gR7j-mOwSKwiUB-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="8zO3fhM4Dob8OyOGSkkv-42" value="/addUser&lt;br&gt;/patchTags&lt;br&gt;/patchUserBio&lt;br&gt;/patchEmail&lt;br&gt;/changePassword&lt;br&gt;/getAvailableTags" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="8zO3fhM4Dob8OyOGSkkv-9" vertex="1" connectable="0">
+        <mxCell id="8zO3fhM4Dob8OyOGSkkv-42" value="/addUser&lt;br&gt;/patchTags&lt;br&gt;/patchUserBio&lt;br&gt;/patchEmail&lt;br&gt;/changePassword" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="8zO3fhM4Dob8OyOGSkkv-9" vertex="1" connectable="0">
           <mxGeometry x="-0.1231" y="-5" relative="1" as="geometry">
             <mxPoint y="-5" as="offset" />
           </mxGeometry>
@@ -23,7 +23,7 @@
         <mxCell id="8zO3fhM4Dob8OyOGSkkv-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="FwraS_gR7j-mOwSKwiUB-2" target="bE1K36vQXj0Vdnw_CU5M-2" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="8zO3fhM4Dob8OyOGSkkv-27" value="/verify&lt;br&gt;/regenerate&lt;br&gt;/cryptPassword" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="8zO3fhM4Dob8OyOGSkkv-19" vertex="1" connectable="0">
+        <mxCell id="8zO3fhM4Dob8OyOGSkkv-27" value="/verify&lt;br&gt;/generate&lt;br&gt;/cryptPassword" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="8zO3fhM4Dob8OyOGSkkv-19" vertex="1" connectable="0">
           <mxGeometry x="0.0541" y="2" relative="1" as="geometry">
             <mxPoint x="-5" y="68" as="offset" />
           </mxGeometry>
@@ -207,7 +207,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="LGcaSpZkdw7gi7dxYWef" name="UserService">
-    <mxGraphModel dx="1874" dy="838" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1600" math="0" shadow="0">
+    <mxGraphModel dx="1662" dy="804" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1600" math="0" shadow="0">
       <root>
         <mxCell id="0Y-X4P7G-rwoWofDyXws-0" />
         <mxCell id="0Y-X4P7G-rwoWofDyXws-1" parent="0Y-X4P7G-rwoWofDyXws-0" />
@@ -226,13 +226,10 @@
         <mxCell id="_14kWgqdjOg3-kIxM8j--2" value="&lt;h1&gt;/addUser&lt;/h1&gt;&lt;div&gt;&lt;i&gt;reguest:&lt;/i&gt;&lt;/div&gt;&lt;p&gt;{&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;span&gt;email: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;hashedPassword: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;salt: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;name: string;&lt;/p&gt;&lt;p&gt;surname: string;&lt;/p&gt;&lt;p&gt;tags: []string;&lt;/p&gt;&lt;p&gt;&lt;span&gt;}&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;response:&amp;nbsp;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;{&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="0Y-X4P7G-rwoWofDyXws-1" vertex="1">
           <mxGeometry x="80" y="80" width="200" height="400" as="geometry" />
         </mxCell>
-        <mxCell id="4govQhCQrLLHR_mtu9-U-0" value="&lt;h1&gt;/getAvailableTags&lt;/h1&gt;&lt;div&gt;&lt;i&gt;reguest:&lt;/i&gt;&lt;br&gt;&lt;/div&gt;&lt;p&gt;{&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;span&gt;}&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;response:&amp;nbsp;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;{&lt;/p&gt;&lt;p&gt;tags: string[];&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="0Y-X4P7G-rwoWofDyXws-1" vertex="1">
-          <mxGeometry x="760" y="80" width="210" height="400" as="geometry" />
-        </mxCell>
         <mxCell id="So1C_ndeiWQuu2OblqzL-0" value="&lt;h1&gt;/getUserById&lt;/h1&gt;&lt;div&gt;&lt;i&gt;reguest:&lt;/i&gt;&lt;br&gt;&lt;/div&gt;&lt;p&gt;{&amp;nbsp;&lt;/p&gt;&lt;p&gt;id: number;&lt;/p&gt;&lt;p&gt;&lt;span&gt;}&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;response:&amp;nbsp;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;{&lt;/p&gt;&lt;p&gt;&lt;span&gt;email: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;hashedPassword: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;salt: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;name: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;surname: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;tags: []string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;}&lt;/span&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="0Y-X4P7G-rwoWofDyXws-1" vertex="1">
           <mxGeometry x="1030" y="80" width="210" height="400" as="geometry" />
         </mxCell>
-        <mxCell id="So1C_ndeiWQuu2OblqzL-1" value="&lt;h1&gt;/getUsersByTag&lt;/h1&gt;&lt;div&gt;&lt;i&gt;reguest:&lt;/i&gt;&lt;br&gt;&lt;/div&gt;&lt;p&gt;{&amp;nbsp;&lt;/p&gt;&lt;p&gt;tag: string;&lt;/p&gt;&lt;p&gt;&lt;span&gt;}&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;response:&amp;nbsp;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;{&lt;/p&gt;&lt;p&gt;&lt;span&gt;email: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;name: string;&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;surname: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;tags: []string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;}&lt;/span&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="0Y-X4P7G-rwoWofDyXws-1" vertex="1">
+        <mxCell id="So1C_ndeiWQuu2OblqzL-1" value="&lt;h1&gt;/getUsersByTag&lt;/h1&gt;&lt;div&gt;&lt;i&gt;reguest:&lt;/i&gt;&lt;br&gt;&lt;/div&gt;&lt;p&gt;{&amp;nbsp;&lt;/p&gt;&lt;p&gt;tag: string;&lt;/p&gt;&lt;p&gt;&lt;span&gt;}&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;response:&amp;nbsp;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;{&lt;/p&gt;&lt;p&gt;&lt;span&gt;email: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;name: string;&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;surname: string;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span&gt;}&lt;/span&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="0Y-X4P7G-rwoWofDyXws-1" vertex="1">
           <mxGeometry x="1250" y="80" width="210" height="400" as="geometry" />
         </mxCell>
       </root>
@@ -251,6 +248,17 @@
         </mxCell>
         <mxCell id="CCanVfhdNNLBfqAUuHoI-0" value="&lt;h1&gt;/cryptPassword&lt;/h1&gt;&lt;div&gt;&lt;i&gt;request:&lt;/i&gt;&lt;/div&gt;&lt;div&gt;{&lt;/div&gt;&lt;div&gt;password: string;&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;i&gt;response:&lt;/i&gt;&lt;/div&gt;&lt;div&gt;{&lt;/div&gt;&lt;div&gt;hashedPassword: string;&lt;/div&gt;&lt;div&gt;salt: string;&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="LWaVtFIe3bwIcj4Zivtj-1" vertex="1">
           <mxGeometry x="640" y="80" width="200" height="400" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="jPax2lbH7g3KD5HKWm3Q" name="TagsService">
+    <mxGraphModel dx="1662" dy="804" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="AhduXGCm-tz9T3Eep2gg-0" />
+        <mxCell id="AhduXGCm-tz9T3Eep2gg-1" parent="AhduXGCm-tz9T3Eep2gg-0" />
+        <mxCell id="AhduXGCm-tz9T3Eep2gg-2" value="&lt;h1&gt;/getAvailableTags&lt;/h1&gt;&lt;div&gt;&lt;i&gt;reguest:&lt;/i&gt;&lt;br&gt;&lt;/div&gt;&lt;p&gt;{&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;span&gt;}&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;response:&amp;nbsp;&lt;/i&gt;&lt;/p&gt;&lt;p&gt;{&lt;/p&gt;&lt;p&gt;tags: string[];&lt;/p&gt;&lt;p&gt;}&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="AhduXGCm-tz9T3Eep2gg-1">
+          <mxGeometry x="130" y="30" width="210" height="400" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
