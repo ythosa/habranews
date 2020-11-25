@@ -16,6 +16,7 @@ import { ClientGrpc } from '@nestjs/microservices';
 import { UserServiceImpl } from './interfaces/user-service.interface';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { RegenerateTokensDto } from './dto/regenerate-tokens.dto';
 
 @Injectable()
 export class TokenService {
@@ -69,6 +70,12 @@ export class TokenService {
         this.saveRefreshToken(user.id, refreshToken);
 
         return { accessToken, refreshToken };
+    }
+
+    async regenerateTokens(
+        regenerateTokensDto: RegenerateTokensDto,
+    ): Promise<TokensImpl> {
+        throw new Error('Method not implemented.');
     }
 
     verifyByAccessToken(

@@ -2,14 +2,16 @@ import { Controller, Logger } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { CryptPasswordDto } from './dto/crypt-password.dto';
 import { GenerateTokensDto } from './dto/generate-token.dto';
+import { RegenerateTokensDto } from './dto/regenerate-tokens.dto';
 import { VerifyByAccessTokenDto } from './dto/verify-by-acess-token,dto';
 import { CryptedPasswordImpl } from './interfaces/crypted-password.interface';
+import { AuthServiceImpl } from './interfaces/auth-service.interface';
 import { TokensImpl } from './interfaces/tokens.interface';
 import { UserIdImpl } from './interfaces/user-id.interface';
 import { TokenService } from './token.service';
 
 @Controller('token')
-export class TokenController {
+export class TokenController implements AuthServiceImpl {
     private logger = new Logger(TokenController.name);
 
     constructor(private readonly tokenService: TokenService) {}
@@ -21,6 +23,19 @@ export class TokenController {
         );
 
         return this.tokenService.generateTokens(generateTokensDto);
+    }
+
+    @GrpcMethod('AuthService')
+    async regenerate(
+        regenerateTokensDto: RegenerateTokensDto,
+    ): Promise<TokensImpl> {
+        this.logger.log(
+            `Regenerating tokens by refresh token with data: ${JSON.stringify(
+                regenerateTokensDto,
+            )}`,
+        );
+
+        return this.tokenService.regenerateTokens(regenerateTokensDto);
     }
 
     @GrpcMethod('AuthService')
