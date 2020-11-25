@@ -8,9 +8,9 @@ import { ConfigService } from '@nestjs/config';
 import { ClientGrpc } from '@nestjs/microservices';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-import { UserServiceImpl } from './interfaces/user-service.interface';
-import { JwtPayload } from './jwt-payload.interface';
-import { UserIdImpl } from './interfaces/user-id.interface';
+import { UserServiceImpl } from '../interfaces/user-service.interface';
+import { JwtPayload } from '../interfaces/jwt-payload.interface';
+import { UserIdImpl } from '../interfaces/user-id.interface';
 
 @Injectable()
 export class AccessJwtStrategy extends PassportStrategy(

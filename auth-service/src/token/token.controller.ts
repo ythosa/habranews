@@ -1,4 +1,4 @@
-import { Controller, Logger } from '@nestjs/common';
+import { Controller, Logger, UseGuards } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { CryptPasswordDto } from './dto/crypt-password.dto';
 import { GenerateTokensDto } from './dto/generate-token.dto';
@@ -39,6 +39,7 @@ export class TokenController implements AuthServiceImpl {
     }
 
     @GrpcMethod('AuthService')
+    @UseGuards()
     async verifyByAccessToken(
         verifyByAccessTokenDto: VerifyByAccessTokenDto,
     ): Promise<UserIdImpl> {
