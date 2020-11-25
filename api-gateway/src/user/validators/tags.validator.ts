@@ -1,27 +1,34 @@
+import { Inject } from '@nestjs/common';
+import { ClientGrpc } from '@nestjs/microservices';
 import {
     registerDecorator,
     ValidationArguments,
     ValidationOptions,
+    ValidatorConstraintInterface,
 } from 'class-validator';
-import { tagEnum } from '../../subscription/enums/tag.enum';
 
-export function IsValidTags(validationOptions?: ValidationOptions) {
-    return (object: Object, propertyName: string) => {
-        registerDecorator({
-            name: 'isValidTags',
-            target: object.constructor,
-            propertyName: propertyName,
-            options: validationOptions,
-            validator: {
-                validate(value: string[]) {
-                    const validTags = Object.values(tagEnum).map((t) =>
-                        String(t),
-                    );
-                    return value.every((t) => {
-                        return validTags.includes(t);
-                    });
-                },
-            },
-        });
-    };
-}
+// export class IsValidTags implements ValidatorConstraintInterface {
+//     private tagService: ParserServiceImpl;
+
+//     constructor(
+//         @Inject('PARSER_PACKAGE') private client: ClientGrpc,
+//     ) {}
+
+//     onModuleInit() {
+//         this.tagService = this.client.getService<ParserServiceImpl>(
+//             'ParserService',
+//         );
+//     }
+
+//     async validate(value: string[]): Promise<boolean> {
+//         const validTags = this.tagService.getAllTags()
+
+//         return value.every((t) => {
+//             return validTags.includes(t);
+//         });
+//     }
+
+//     defaultMessage(args: ValidationArguments) {
+//         return `Invalid tags passed`;
+//     }
+// }

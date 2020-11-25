@@ -55,6 +55,16 @@ services:
       - auth-service-db-cfg-volume:/usr/local/etc/redis/redis.conf
     networks: 
       - habranews
+  
+  tags-queue:
+    image: 'rabbitmq:3.6-management-alpine'
+    env_file: 
+      - ./tags-queue/rabbitmq.env
+    ports:
+      - '5672:5672'
+      - '15672:15672' # HTTP management UI
+    networks: 
+      - habranews
 
 volumes:
   user-service-db-volume:
