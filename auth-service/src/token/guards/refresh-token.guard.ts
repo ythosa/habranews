@@ -1,4 +1,9 @@
-import { CACHE_MANAGER, CanActivate, ExecutionContext, Inject } from '@nestjs/common';
+import {
+    CACHE_MANAGER,
+    CanActivate,
+    ExecutionContext,
+    Inject,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Cache } from 'cache-manager';
@@ -9,7 +14,7 @@ export class RefreshTokenGuard implements CanActivate {
         @Inject(CACHE_MANAGER) private refreshTokensManager: Cache,
         private readonly jwtService: JwtService,
         private readonly configService: ConfigService,
-    ) {};
+    ) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const requestData = context.switchToRpc().getData();
@@ -17,14 +22,16 @@ export class RefreshTokenGuard implements CanActivate {
 
         let payload: JwtPayload;
         try {
-            payload = this.jwtService.verify(refreshToken, { 
+            payload = this.jwtService.verify(refreshToken, {
                 secret: this.configService.get<string>('REFRESH_JWT_SECRET'),
             });
         } catch (e) {
             return false;
         }
 
-        const storedToken = await this.refreshTokensManager.get(payload.id.toString());
+        const storedToken = await this.refreshTokensManager.get(
+            payload.id.toString(),
+        );
         if (storedToken != refreshToken) {
             return false;
         }

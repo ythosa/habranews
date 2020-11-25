@@ -57,7 +57,9 @@ export class TokenService {
         }
 
         const payload = { id: user.id };
-        const { accessToken, refreshToken } = this.generateTokensByPayload(payload);
+        const { accessToken, refreshToken } = this.generateTokensByPayload(
+            payload,
+        );
 
         this.saveRefreshToken(user.id, refreshToken);
 
@@ -67,7 +69,9 @@ export class TokenService {
     async regenerateTokens(
         regenerateTokensDto: RegenerateTokensDto,
     ): Promise<TokensImpl> {
-        const payload: JwtPayload = this.jwtService.verify(regenerateTokensDto.refreshToken);
+        const payload: JwtPayload = this.jwtService.verify(
+            regenerateTokensDto.refreshToken,
+        );
 
         return this.generateTokensByPayload(payload);
     }
@@ -78,10 +82,18 @@ export class TokenService {
         throw new Error('Method not implemented.');
     }
 
-    cryptPassword(
+    async cryptPassword(
         cryptPasswordDto: CryptPasswordDto,
     ): Promise<CryptedPasswordImpl> {
-        throw new Error('Method not implemented.');
+        const salt = await bcrypt.genSalt(
+            this.configService.get<number>('PASSWORD_SALT_ROUNDS'),
+        );
+        const hashedPassword = await bcrypt.hash(
+            cryptPasswordDto.password,
+            salt,
+        );
+
+        return { hashedPassword, salt };
     }
 
     private saveRefreshToken(id: number, refreshToken: string): void {
@@ -101,6 +113,6 @@ export class TokenService {
             expiresIn: this.configService.get<string>('REFRESH_JWT_EXPIRES_IN'),
         });
 
-        return { accessToken, refreshToken }; 
+        return { accessToken, refreshToken };
     }
 }
