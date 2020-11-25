@@ -71,6 +71,9 @@ export class TokenService {
     ): Promise<TokensImpl> {
         const payload: JwtPayload = this.jwtService.verify(
             regenerateTokensDto.refreshToken,
+            {
+                secret: this.configService.get<string>('REFRESH_JWT_SECRET'),
+            },
         );
 
         return this.generateTokensByPayload(payload);
@@ -78,8 +81,15 @@ export class TokenService {
 
     verifyByAccessToken(
         verifyByAccessTokenDto: VerifyByAccessTokenDto,
-    ): Promise<UserIdImpl> {
-        throw new Error('Method not implemented.');
+    ): UserIdImpl {
+        const payload: JwtPayload = this.jwtService.verify(
+            verifyByAccessTokenDto.accessToken,
+            {
+                secret: this.configService.get<string>('ACCESS_JWT_SECRET'),
+            }
+        );
+        
+        return payload as UserIdImpl;
     }
 
     async cryptPassword(
