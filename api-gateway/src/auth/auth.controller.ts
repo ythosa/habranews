@@ -6,8 +6,8 @@ import { AuthCredentialsDTO } from './dto/auth-credentials.dto';
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
-    @Get('/signIn')
-    async signIn(authCredentialsDTO: AuthCredentialsDTO): Promise<IUser> {
+    // @Get('/signIn')
+    // async signIn(authCredentialsDTO: AuthCredentialsDTO): Promise<IUser> {
         
-    }
+    // }
 }
