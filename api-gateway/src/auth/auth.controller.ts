@@ -9,11 +9,11 @@ export class AuthController {
 
     @Post('/signIn')
     async signIn(authCredentialsDTO: AuthCredentialsDTO): Promise<TokensImpl> {
-        return
+        return;
     }
 
     @Post('/signUp')
     async signUp(authCredentialsDTO: AuthCredentialsDTO): Promise<void> {
-        return
+        return;
     }
 }

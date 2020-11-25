@@ -11,6 +11,8 @@ export class UserService {
     constructor(@Inject('USER_PACKAGE') private client: ClientGrpc) {}
 
     onModuleInit() {
-        this.userService = this.client.getService<UserServiceImpl>('UserService');
+        this.userService = this.client.getService<UserServiceImpl>(
+            'UserService',
+        );
     }
 }

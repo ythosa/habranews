@@ -1,9 +1,9 @@
-import { GetUserByIdDtoImpl } from "./get-user-by-id-dto.interface";
-import { PatchBioDtoImpl } from "./patch-bio-dto.interface";
-import { PatchEmailDtoImpl } from "./patch-email-dto.interface";
-import { PatchTagsDtoImpl } from "./patch-tags-dto.interface";
-import { ChangePasswordDtoImpl } from "./change-password-dto.interface";
-import { UserImpl } from "./user.interface";
+import { GetUserByIdDtoImpl } from './get-user-by-id-dto.interface';
+import { PatchBioDtoImpl } from './patch-bio-dto.interface';
+import { PatchEmailDtoImpl } from './patch-email-dto.interface';
+import { PatchTagsDtoImpl } from './patch-tags-dto.interface';
+import { ChangePasswordDtoImpl } from './change-password-dto.interface';
+import { UserImpl } from './user.interface';
 
 export interface UserServiceImpl {
     changePassword(changePasswordDto: ChangePasswordDtoImpl): Promise<void>;

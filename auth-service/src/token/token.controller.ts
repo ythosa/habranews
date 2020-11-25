@@ -3,7 +3,7 @@ import { GrpcMethod } from '@nestjs/microservices';
 import { CryptPasswordDto } from './dto/crypt-password.dto';
 import { GenerateTokensDto } from './dto/generate-token.dto';
 import { RegenerateTokensDto } from './dto/regenerate-tokens.dto';
-import { VerifyByAccessTokenDto } from './dto/verify-by-acess-token,dto';
+import { VerifyByAccessTokenDto } from './dto/verify-by-access-token.dto';
 import { CryptedPasswordImpl } from './interfaces/crypted-password.interface';
 import { AuthServiceImpl } from './interfaces/auth-service.interface';
 import { TokensImpl } from './interfaces/tokens.interface';

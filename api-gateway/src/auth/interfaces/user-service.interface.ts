@@ -1,4 +1,4 @@
-import { AddUserDtoImpl } from "./add-user-dto.interface";
+import { AddUserDtoImpl } from './add-user-dto.interface';
 
 export interface UserServiceImpl {
     addUser(addUserDto: AddUserDtoImpl): Promise<void>;

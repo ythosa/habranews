@@ -3,32 +3,20 @@ import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-    constructor(
-        private readonly userService: UserService,
-    ) {}
+    constructor(private readonly userService: UserService) {}
 
     @Get('/profile')
-    getProfile() {
-
-    }
+    getProfile() {}
 
     @Patch('/password')
-    changePassword() {
-
-    }
+    changePassword() {}
 
     @Patch('/bio')
-    updateBio() {
-
-    }
+    updateBio() {}
 
     @Patch('/email')
-    updateEmail() {
-
-    }
+    updateEmail() {}
 
     @Patch('/tags')
-    updateTags() {
-        
-    }
+    updateTags() {}
 }
