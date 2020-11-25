@@ -17,6 +17,7 @@ import { UserServiceImpl } from './interfaces/user-service.interface';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { RegenerateTokensDto } from './dto/regenerate-tokens.dto';
+import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
 export class TokenService {
@@ -56,16 +57,7 @@ export class TokenService {
         }
 
         const payload = { id: user.id };
-
-        const accessToken = this.jwtService.sign(payload, {
-            secret: this.configService.get<string>('ACCESS_JWT_SECRET'),
-            expiresIn: this.configService.get<string>('ACCESS_JWT_EXPIRES_IN'),
-        });
-
-        const refreshToken = this.jwtService.sign(payload, {
-            secret: this.configService.get<string>('REFRESH_JWT_SECRET'),
-            expiresIn: this.configService.get<string>('REFRESH_JWT_EXPIRES_IN'),
-        });
+        const { accessToken, refreshToken } = this.generateTokensByPayload(payload);
 
         this.saveRefreshToken(user.id, refreshToken);
 
@@ -75,7 +67,9 @@ export class TokenService {
     async regenerateTokens(
         regenerateTokensDto: RegenerateTokensDto,
     ): Promise<TokensImpl> {
-        throw new Error('Method not implemented.');
+        const payload: JwtPayload = this.jwtService.verify(regenerateTokensDto.refreshToken);
+
+        return this.generateTokensByPayload(payload);
     }
 
     verifyByAccessToken(
@@ -94,5 +88,19 @@ export class TokenService {
         this.refreshTokensManager.set(id.toString(), refreshToken, {
             ttl: this.configService.get<number>('TOKENDB_TTL'),
         });
+    }
+
+    private generateTokensByPayload(payload: JwtPayload): TokensImpl {
+        const accessToken = this.jwtService.sign(payload, {
+            secret: this.configService.get<string>('ACCESS_JWT_SECRET'),
+            expiresIn: this.configService.get<string>('ACCESS_JWT_EXPIRES_IN'),
+        });
+
+        const refreshToken = this.jwtService.sign(payload, {
+            secret: this.configService.get<string>('REFRESH_JWT_SECRET'),
+            expiresIn: this.configService.get<string>('REFRESH_JWT_EXPIRES_IN'),
+        });
+
+        return { accessToken, refreshToken }; 
     }
 }

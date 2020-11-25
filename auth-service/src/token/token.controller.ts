@@ -9,6 +9,7 @@ import { AuthServiceImpl } from './interfaces/auth-service.interface';
 import { TokensImpl } from './interfaces/tokens.interface';
 import { UserIdImpl } from './interfaces/user-id.interface';
 import { TokenService } from './token.service';
+import { RefreshTokenGuard } from './guards/refresh-token.guard';
 
 @Controller('token')
 export class TokenController implements AuthServiceImpl {
@@ -26,6 +27,7 @@ export class TokenController implements AuthServiceImpl {
     }
 
     @GrpcMethod('AuthService')
+    @UseGuards(RefreshTokenGuard)
     async regenerate(
         regenerateTokensDto: RegenerateTokensDto,
     ): Promise<TokensImpl> {
@@ -39,7 +41,6 @@ export class TokenController implements AuthServiceImpl {
     }
 
     @GrpcMethod('AuthService')
-    @UseGuards()
     async verifyByAccessToken(
         verifyByAccessTokenDto: VerifyByAccessTokenDto,
     ): Promise<UserIdImpl> {
