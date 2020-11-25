@@ -53,34 +53,19 @@ export class TokenService {
             throw new BadRequestException('Invalid email or password');
         }
 
-        const tokens: TokensImpl = {
-            accessToken: this.jwtService.sign(
-                {
-                    id: user.id,
-                },
-                {
-                    secret: this.configService.get<string>('ACCESS_JWT_SECRET'),
-                    expiresIn: this.configService.get<string>(
-                        'ACCESS_JWT_EXPIRES_IN',
-                    ),
-                },
-            ),
-            refreshToken: this.jwtService.sign(
-                {
-                    id: user.id,
-                },
-                {
-                    secret: this.configService.get<string>(
-                        'REFRESH_JWT_SECRET',
-                    ),
-                    expiresIn: this.configService.get<string>(
-                        'REFRESH_JWT_EXPIRES_IN',
-                    ),
-                },
-            ),
-        };
+        const payload = { id: user.id };
 
-        return tokens;
+        const accessToken = this.jwtService.sign(payload, {
+            secret: this.configService.get<string>('ACCESS_JWT_SECRET'),
+            expiresIn: this.configService.get<string>('ACCESS_JWT_EXPIRES_IN'),
+        });
+
+        const refreshToken = this.jwtService.sign(payload, {
+            secret: this.configService.get<string>('REFRESH_JWT_SECRET'),
+            expiresIn: this.configService.get<string>('REFRESH_JWT_EXPIRES_IN'),
+        });
+
+        return { accessToken, refreshToken };
     }
 
     verifyByAccessToken(
