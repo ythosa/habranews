@@ -3,7 +3,7 @@ import {
     ValidationArguments,
     ValidationOptions,
 } from 'class-validator';
-import { tagEnum } from '../enums/tag.enum';
+import { tagEnum } from '../../subscription/enums/tag.enum';
 
 export function IsValidTags(validationOptions?: ValidationOptions) {
     return (object: Object, propertyName: string) => {

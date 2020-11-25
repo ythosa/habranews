@@ -1,5 +1,5 @@
 import { ArrayMinSize, IsEmail, IsNotEmpty } from 'class-validator';
-import { IsValidTags } from '../validators/tags.validator';
+import { IsValidTags } from '../../user/validators/tags.validator';
 
 export class SubscribeDto {
     @IsNotEmpty()
