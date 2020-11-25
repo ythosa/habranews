@@ -4,6 +4,7 @@ import {
     Inject,
     Injectable,
 } from '@nestjs/common';
+import { Cache } from 'cache-manager';
 import { CryptPasswordDto } from './dto/crypt-password.dto';
 import { GenerateTokensDto } from './dto/generate-token.dto';
 import { VerifyByAccessTokenDto } from './dto/verify-by-acess-token,dto';
@@ -65,6 +66,8 @@ export class TokenService {
             expiresIn: this.configService.get<string>('REFRESH_JWT_EXPIRES_IN'),
         });
 
+        this.saveRefreshToken(user.id, refreshToken);
+
         return { accessToken, refreshToken };
     }
 
@@ -78,5 +81,11 @@ export class TokenService {
         cryptPasswordDto: CryptPasswordDto,
     ): Promise<CryptedPasswordImpl> {
         throw new Error('Method not implemented.');
+    }
+
+    private saveRefreshToken(id: number, refreshToken: string): void {
+        this.refreshTokensManager.set(id.toString(), refreshToken, {
+            ttl: this.configService.get<number>('TOKENDB_TTL'),
+        });
     }
 }

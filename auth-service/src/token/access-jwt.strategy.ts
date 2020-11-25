@@ -14,7 +14,10 @@ import { UserIdImpl } from './interfaces/user-id.interface';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(
+    Strategy,
+    'jwt-access-strategy',
+) {
     private logger = new Logger(JwtStrategy.name);
 
     private userService: UserServiceImpl;
