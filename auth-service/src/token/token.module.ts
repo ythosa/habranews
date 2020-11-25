@@ -40,16 +40,6 @@ import { TokenController } from './token.controller';
             defaultStrategy: 'jwt',
         }),
         JwtModule.register({}),
-        // Async({
-        //     useFactory: (configService: ConfigService) => ({
-        //         secret: configService.get<string>('ACCESS_JWT_SECRET'),
-        //         signOptions: {
-        //             expiresIn: configService.get<string>('ACCESS_JWT_EXPIRES_IN'),
-        //         },
-        //     }),
-        //     inject: [ConfigService],
-        //     imports: [],
-        // }
     ],
     providers: [TokenService],
     controllers: [TokenController],

@@ -1,4 +1,5 @@
 import {
+    CACHE_MANAGER,
     Inject,
     Injectable,
     Logger,
@@ -13,28 +14,22 @@ import { JwtPayload } from './jwt-payload.interface';
 import { UserIdImpl } from './interfaces/user-id.interface';
 
 @Injectable()
-export class AccessJwtStrategy extends PassportStrategy(
+export class RefreshJwtStrategy extends PassportStrategy(
     Strategy,
-    'jwt-access-strategy',
+    'jwt-refresh-strategy',
 ) {
-    private logger = new Logger(AccessJwtStrategy.name);
+    private logger = new Logger(RefreshJwtStrategy.name);
 
     private userService: UserServiceImpl;
 
     constructor(
-        @Inject('USER_PACKAGE') private client: ClientGrpc,
+        @Inject(CACHE_MANAGER) private refreshTokensManager: Cache,
         private readonly configService: ConfigService,
     ) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: configService.get<string>('ACCESS_JWT_SECRET'),
         });
-    }
-
-    onModuleInit() {
-        this.userService = this.client.getService<UserServiceImpl>(
-            'UserService',
-        );
     }
 
     async validate(payload: JwtPayload): Promise<UserIdImpl> {

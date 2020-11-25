@@ -5,6 +5,7 @@ package auth;
 service AuthService {
     rpc VerifyByAccessToken(VerifyByAccessTokenDto) returns (UserId);
     rpc Generate(GenerateTokensDto) returns (Tokens);
+    rpc Regenerate(RegenerateTokensDto) returns (Tokens);
     rpc CryptPassword(CryptPasswordDto) returns (CryptedPassword);
 }
 
