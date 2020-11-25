@@ -6,7 +6,7 @@ import {
     UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ClientGrpc } from '@nestjs/microservices';
+import { Cache } from 'cache-manager';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { UserServiceImpl } from './interfaces/user-service.interface';
@@ -20,8 +20,6 @@ export class RefreshJwtStrategy extends PassportStrategy(
 ) {
     private logger = new Logger(RefreshJwtStrategy.name);
 
-    private userService: UserServiceImpl;
-
     constructor(
         @Inject(CACHE_MANAGER) private refreshTokensManager: Cache,
         private readonly configService: ConfigService,
@@ -34,9 +32,9 @@ export class RefreshJwtStrategy extends PassportStrategy(
 
     async validate(payload: JwtPayload): Promise<UserIdImpl> {
         const { id } = payload;
-        const user = await this.userService.getUserById({ id }).toPromise();
-        if (!user) {
-            throw new UnauthorizedException();
+        const token = await this.refreshTokensManager.get(id.toString());
+        if (!token) {
+            throw new UnauthorizedException('Bad refresh token');
         }
 
         return { id };
