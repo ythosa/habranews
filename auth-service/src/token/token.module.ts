@@ -39,16 +39,17 @@ import { TokenController } from './token.controller';
         PassportModule.register({
             defaultStrategy: 'jwt',
         }),
-        JwtModule.registerAsync({
-            useFactory: (configService: ConfigService) => ({
-                secret: configService.get<string>('JWT_SECRET'),
-                signOptions: {
-                    expiresIn: configService.get<string>('JWT_EXPIRES_IN'),
-                },
-            }),
-            inject: [ConfigService],
-            imports: [],
-        }),
+        JwtModule.register({}),
+        // Async({
+        //     useFactory: (configService: ConfigService) => ({
+        //         secret: configService.get<string>('ACCESS_JWT_SECRET'),
+        //         signOptions: {
+        //             expiresIn: configService.get<string>('ACCESS_JWT_EXPIRES_IN'),
+        //         },
+        //     }),
+        //     inject: [ConfigService],
+        //     imports: [],
+        // }
     ],
     providers: [TokenService],
     controllers: [TokenController],

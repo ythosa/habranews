@@ -1,5 +1,5 @@
-import { isString } from "util";
+import { isString } from 'util';
 
 export class VerifyByAccessTokenDto {
-    accessToken: string
+    accessToken: string;
 }

@@ -24,16 +24,22 @@ export class TokenController {
     }
 
     @GrpcMethod('AuthService')
-    async verifyByAccessToken(verifyByAccessTokenDto: VerifyByAccessTokenDto): Promise<UserIdImpl> {
+    async verifyByAccessToken(
+        verifyByAccessTokenDto: VerifyByAccessTokenDto,
+    ): Promise<UserIdImpl> {
         this.logger.log(
-            `Verifying by access token with data: ${JSON.stringify(verifyByAccessTokenDto)}`,
+            `Verifying by access token with data: ${JSON.stringify(
+                verifyByAccessTokenDto,
+            )}`,
         );
 
         return this.tokenService.verifyByAccessToken(verifyByAccessTokenDto);
     }
 
     @GrpcMethod('AuthService')
-    async cryptPassword(cryptPasswordDto: CryptPasswordDto): Promise<CryptedPasswordImpl> {
+    async cryptPassword(
+        cryptPasswordDto: CryptPasswordDto,
+    ): Promise<CryptedPasswordImpl> {
         this.logger.log(
             `Crypting password with data: ${JSON.stringify(cryptPasswordDto)}`,
         );

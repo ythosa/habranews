@@ -5,5 +5,7 @@ import { UserImpl } from './user.interface';
 
 export interface UserServiceImpl {
     getUserById(getUserByIdDto: getUserByIdDtoImpl): Observable<UserImpl>;
-    getUserByEmail(getUserByEmailDto: GetUserByEmailDtoImpl): Observable<UserImpl>;
+    getUserByEmail(
+        getUserByEmailDto: GetUserByEmailDtoImpl,
+    ): Observable<UserImpl>;
 }

@@ -7,4 +7,3 @@ export interface UserImpl {
     surname: string;
     tags: string[];
 }
-
