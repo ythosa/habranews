@@ -61,7 +61,7 @@ services:
     env_file: 
       - ./tags-queue/rabbitmq.env
     ports:
-      - '5672:5672'
+      # - '5672:5672'
       - '15672:15672' # HTTP management UI
     networks: 
       - habranews
