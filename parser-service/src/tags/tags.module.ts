@@ -2,6 +2,7 @@ import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq/lib/rabbitmq.module';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TagsService } from './tags.service';
+import { TagsController } from './tags.controller';
 
 @Module({
     imports: [
@@ -9,8 +10,8 @@ import { TagsService } from './tags.service';
             useFactory: (configService: ConfigService) => ({
                 exchanges: [
                     {
-                        name: 'exchange1',
-                        type: 'topic',
+                        name: 'tags-exchange',
+                        type: 'direct',
                     },
                 ],
                 uri: configService.get<string>('TAGS_QUEUE_URL'),
@@ -19,6 +20,7 @@ import { TagsService } from './tags.service';
             inject: [ConfigService],
         }),
     ],
-    providers: [TagsService]
+    providers: [TagsService],
+    controllers: [TagsController]
 })
 export class TagsModule {}
