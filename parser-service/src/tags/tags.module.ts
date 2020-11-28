@@ -1,6 +1,7 @@
-import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
+import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq/lib/rabbitmq.module';
 import { Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config/dist/config.service';
+import { ConfigService } from '@nestjs/config';
+import { TagsService } from './tags.service';
 
 @Module({
     imports: [
@@ -18,5 +19,6 @@ import { ConfigService } from '@nestjs/config/dist/config.service';
             inject: [ConfigService],
         }),
     ],
+    providers: [TagsService]
 })
-export class TagsQueue {}
+export class TagsModule {}
