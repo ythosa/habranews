@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose/dist/common/mongoose.decorators';
+import { Cron } from '@nestjs/schedule';
 import { Model } from 'mongoose';
 import { tagsEnum } from './enums/tags.enum';
 import { TagsImpl } from './interfaces/tags.interface';
@@ -7,6 +8,8 @@ import { Tag, TagDocument } from './schemas/tag.schema';
 
 @Injectable()
 export class TagsService {
+    private logger = new Logger(TagsService.name);
+    
     constructor(
         @InjectModel(Tag.name) private readonly tagModel: Model<TagDocument>,
     ) {}
@@ -31,5 +34,11 @@ export class TagsService {
             });
             newTag.save();
         });
+    }
+
+    // @Cron('0 * * * *')
+    @Cron('45 * * * * *')
+    handleCron() {
+        this.logger.log('Starting parsing habr...');
     }
 }
