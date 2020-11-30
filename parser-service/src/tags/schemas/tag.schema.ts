@@ -1,10 +1,23 @@
-import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 import { tagsEnum } from '../enums/tags.enum';
 
-export const TagSchema = new mongoose.Schema({
-    tag: { type: String, required: true, enum: Object.values(tagsEnum) },
-    postId: { type: String, default: null },
-    link: { type: String, default: null },
-})
+@Schema()
+export class Tag {
+    @Prop({
+        type: String,
+        required: true,
+        enum: Object.values(tagsEnum),
+        unique: true,
+    })
+    tag: string;
 
-TagSchema.index({ tag: 1 }, { unique: true });
+    @Prop({ type: String, default: null })
+    postId: string;
+
+    @Prop({ type: String, default: null })
+    link: string;
+}
+
+export const TagSchema = SchemaFactory.createForClass(Tag);
+export type TagDocument = Tag & Document;

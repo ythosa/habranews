@@ -1,3 +1,3 @@
 export interface TagsImpl {
-    tags: string[],
+    tags: string[];
 }

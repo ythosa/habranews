@@ -5,9 +5,7 @@ import { TagsService } from './tags.service';
 
 @Controller('tags')
 export class TagsController {
-    constructor(
-        private readonly tagsService: TagsService,
-    ) {}
+    constructor(private readonly tagsService: TagsService) {}
 
     @RabbitRPC({
         exchange: 'tags-exchange',
