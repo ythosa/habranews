@@ -58,6 +58,7 @@ services:
   
   tags-queue:
     image: 'rabbitmq:3.6-management-alpine'
+    container_name: tags-queue
     env_file: 
       - ./tags-queue/rabbitmq.env
     ports:

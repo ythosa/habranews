@@ -1,16 +1,18 @@
 syntax = "proto3";
 
+import "google/protobuf/empty.proto";
+
 package user;
 
 service UserService {
-  rpc AddUser (User) returns () {};
-  rpc ChangePassword (ChangePasswordDto) returns () {};
+  rpc AddUser (User) returns (google.protobuf.Empty) {};
+  rpc ChangePassword (ChangePasswordDto) returns (google.protobuf.Empty) {};
 
-  rpc PatchTags (PatchTagsDto) returns () {};
-  rpc PatchEmail (PatchEmailDto) returns () {};
-  rpc PatchBio (PatchBioDto) returns () {};
+  rpc PatchTags (PatchTagsDto) returns (google.protobuf.Empty) {};
+  rpc PatchEmail (PatchEmailDto) returns (google.protobuf.Empty) {};
+  rpc PatchBio (PatchBioDto) returns (google.protobuf.Empty) {};
 
-  rpc GetUserByEmail (GetUserByEmailDto) return (User) {};
+  rpc GetUserByEmail (GetUserByEmailDto) returns (User) {};
   rpc GetUserById (GetUserByIdDto) returns (User) {};
   rpc GetUsersByTag (GetUsersByTagDto) returns (UsersInformationForMail) {};
 }
@@ -48,7 +50,7 @@ message PatchBioDto {
 }
 message PatchTagsDto {
   int32 userId = 1;
-  Tags tags = 2;
+  repeated string tags = 2;
 }
 
 message GetUserByIdDto {

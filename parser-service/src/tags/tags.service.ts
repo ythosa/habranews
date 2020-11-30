@@ -36,8 +36,7 @@ export class TagsService {
         });
     }
 
-    // @Cron('0 * * * *')
-    @Cron('45 * * * * *')
+    @Cron('0 * * * *')
     handleCron() {
         this.logger.log('Starting parsing habr...');
     }

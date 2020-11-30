@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose/dist/mongoose.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { configModule } from './configure.root';
 import { TagsModule } from './tags/tags.module';
 
 @Module({
     imports: [
-        ConfigModule,
+        configModule,
         TagsModule,
         MongooseModule.forRootAsync({
             useFactory: (configService: ConfigService) => ({
