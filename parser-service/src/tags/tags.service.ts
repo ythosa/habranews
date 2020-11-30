@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { tagsEnum } from './enums/tags.enum';
 import { TagsImpl } from './interfaces/tags.interface';
 import { Tag, TagDocument } from './schemas/tag.schema';
+import { HubScrapper } from './scrapping/hub-scrapper';
 
 @Injectable()
 export class TagsService {
@@ -36,8 +37,13 @@ export class TagsService {
         });
     }
 
-    @Cron('0 * * * *')
-    handleCron() {
+    // @Cron('0 * * * *')
+    @Cron('20 * * * * *')
+    async handleCron() {
         this.logger.log('Starting parsing habr...');
+        const hubScrapper = new HubScrapper();
+        const posts = await hubScrapper.getNewPosts('go', '1');
+
+        console.log(posts);
     }
 }
