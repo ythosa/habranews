@@ -27,8 +27,8 @@ export class HubScrapper {
 
         let posts: PostImpl[] = [];
         
-        // get list of posts : document.body.querySelector('.posts_lists > .content-list.shortcuts_items');
-        // list.childNodes[1].childNodes[1].childNodes[3].textContent  // to get title of first post
+        // get list of posts : document.body.querySelector('.content-list.shortcuts_items');
+        // list.childNodes[1].childNodes[1].childNodes[3].textContent.trim()  // to get title of first post
         postsList.forEach((v) => this.logger.log(v.childNodes[0].childNodes[1].childNodes[0].nodeName))
         // this.logger.log(postsList.values);
 
