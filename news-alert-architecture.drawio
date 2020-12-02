@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-26T09:10:47.144Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36" etag="jk-i1G-5B9RACssjQaIh" version="13.10.2" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2020-12-02T16:15:09.816Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36" etag="tsN6DwWvwFkgkw1pMYoq" version="13.10.4" type="github" pages="5">
   <diagram id="zYsj_GCrEN45drpil_GK" name="Architecture">
-    <mxGraphModel dx="2774" dy="2438" grid="1" gridSize="11" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1600" math="0" shadow="0">
+    <mxGraphModel dx="2562" dy="2404" grid="1" gridSize="11" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="1600" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -138,8 +138,8 @@
         <mxCell id="8zO3fhM4Dob8OyOGSkkv-34" value="&lt;b&gt;UserModel&lt;br&gt;&lt;/b&gt;{ id, email, hashedPassword, salt,&lt;br&gt;&amp;nbsp;name, surname, tags }&amp;nbsp;&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
           <mxGeometry x="957" y="-362" width="198" height="44" as="geometry" />
         </mxCell>
-        <mxCell id="8zO3fhM4Dob8OyOGSkkv-43" value="&lt;b&gt;PostModel&lt;/b&gt;&lt;br&gt;{ tag, post_id, link }&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
-          <mxGeometry x="473" y="323.5" width="121" height="33" as="geometry" />
+        <mxCell id="8zO3fhM4Dob8OyOGSkkv-43" value="&lt;b&gt;PostModel&lt;/b&gt;&lt;br&gt;{ tag, title, post_id, link }&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+          <mxGeometry x="462" y="323.5" width="143" height="33" as="geometry" />
         </mxCell>
         <mxCell id="8zO3fhM4Dob8OyOGSkkv-44" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="-349.5" y="-27" width="3" height="3" as="geometry" />
