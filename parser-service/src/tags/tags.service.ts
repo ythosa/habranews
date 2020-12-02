@@ -51,8 +51,8 @@ export class TagsService {
         this.logger.log('Starting parsing habr...');
         const hubScrapper = new HubScrapper();
 
-        const hubs = await this.getAvailableTags();
-        for (const hub of hubs.tags) {
+        const hubs = await this.getTrackedTags();
+        for (const hub of hubs) {
             const post = await this.tagModel.findOne({
                 tag: hub,
             });
@@ -64,7 +64,7 @@ export class TagsService {
                 lastId,
             );
 
-            if (!posts.length) return;
+            if (!posts.length) return; // no updates -> return
 
             const notificationMessage: NotificationMessageImpl = {
                 tag: hub,
