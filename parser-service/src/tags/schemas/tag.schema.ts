@@ -13,7 +13,10 @@ export class Tag {
     tag: string;
 
     @Prop({ type: String, default: null })
-    postId: string;
+    title: string;
+
+    @Prop({ type: Number, default: null })
+    postId: number;
 
     @Prop({ type: String, default: null })
     link: string;

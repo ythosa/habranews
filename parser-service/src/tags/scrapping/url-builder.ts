@@ -1,7 +1,12 @@
 export class UrlBuilder {
-    private readonly baseUrl: string = 'https://habr.com/ru/hub/';
+    private readonly postBaseURL: string = 'https://habr.com/ru/post/';  
+    private readonly hubBaseURL: string = 'https://habr.com/ru/hub/';
 
-    getHubUrl(hubName: string): string {
-        return this.baseUrl + hubName;
+    public getHubUrl(hubName: string): string {
+        return this.hubBaseURL.concat(hubName);
+    }
+
+    public getPostLink(postId): string {
+        return this.postBaseURL.concat(postId);        
     }
 }

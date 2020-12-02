@@ -12,32 +12,48 @@ export class HubScrapper {
         this.urlBuilder = new UrlBuilder();
     }
 
-    public async getNewPosts(hub: string, lastId: string): Promise<PostImpl[]> {
-        try{
-        const hubUrl: string = this.urlBuilder.getHubUrl(hub);
-        this.logger.log(hubUrl);
+    private getTitleOfPost(post): string {
+        return post.childNodes[1].childNodes[3].childNodes[1].textContent
+    }
 
+    private getPostId(post): number {
+        return post.id.split('_')[1];
+    }
+
+    private isPost(post): boolean {
+        return post.id.match(/post_\d+/)
+    }
+
+    public async getAllPosts(hubURL: string): Promise<PostImpl[]> {
         const { data: rowHtml } = await Axios.get(hubUrl);
-
         const domParser = new JSDOM(rowHtml);
         const body = domParser.window.document.body;
 
-        const postsList = body.querySelector('div.posts_list > ul').childNodes;
-        // this.logger.log(posts);
+        const posts = body.querySelectorAll('.content-list__item.content-list__item_post.shortcuts_item')
+        const parsedPosts: PostImpl[] = [];
+        posts.forEach((p) => { 
+            if (this.isPost(p)) {
+                const postId = this.getPostId(p)
+                parsedPosts.push({
+                    title: this.getTitleOfPost(p),
+                    postId: postId,
+                    link: this.urlBuilder.getPostLink(postId),
+                })
+                console.log(parsedPosts[parsedPosts.length - 1])
+            } 
+        })
 
-        let posts: PostImpl[] = [];
-        
-        // get list of posts : document.body.querySelector('.content-list.shortcuts_items');
-        // list.childNodes[1].childNodes[1].childNodes[3].textContent.trim()  // to get title of first post
-        postsList.forEach((v) => this.logger.log(v.childNodes[0].childNodes[1].childNodes[0].nodeName))
-        // this.logger.log(postsList.values);
+        return parsedPosts
+    }
 
-        // posts.entries.
+    public async getNewPosts(hub: string, lastId: string): Promise<PostImpl[]> {
+        const hubUrl: string = this.urlBuilder.getHubUrl(hub);
+        const allPosts: PostImpl[] = await this.getAllPosts(hubUrl)
+
+        // const lastPost = 
+
+        // allPosts.filter(())
 
         return
-        }
-        catch (e) {
-            this.logger.error(e);
-        }
     }
 }

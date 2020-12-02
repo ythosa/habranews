@@ -1,4 +1,5 @@
 export interface PostImpl {
-    postId: string;
+    title: string;
+    postId: number;
     link: string;
 }
