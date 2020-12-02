@@ -53,7 +53,9 @@ export class TagsService {
 
         const hubs = await this.getAvailableTags();
         for (const hub of hubs.tags) {
-            const posts: PostImpl[] = await hubScrapper.getNewPosts(hub, null);
+            const { postId: lastId } = await this.tagModel.findOne({ tag: hub })
+            const posts: PostImpl[] = await hubScrapper.getNewPosts(hub, lastId);
+            
             if (posts.length) {
                 const notificationMessage: NotificationMessageImpl = {
                     tag: hub,
