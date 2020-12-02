@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose/dist/common/mongoose.decorators';
 import { Cron } from '@nestjs/schedule';
 import { Model } from 'mongoose';
 import { tagsEnum } from './enums/tags.enum';
+import { PostImpl } from './interfaces/post.interface';
 import { TagsImpl } from './interfaces/tags.interface';
 import { Tag, TagDocument } from './schemas/tag.schema';
 import { HubScrapper } from './scrapping/hub-scrapper';
@@ -10,7 +11,7 @@ import { HubScrapper } from './scrapping/hub-scrapper';
 @Injectable()
 export class TagsService {
     private logger = new Logger(TagsService.name);
-    
+
     constructor(
         @InjectModel(Tag.name) private readonly tagModel: Model<TagDocument>,
     ) {}
@@ -42,7 +43,7 @@ export class TagsService {
     async handleCron() {
         this.logger.log('Starting parsing habr...');
         const hubScrapper = new HubScrapper();
-        const posts = await hubScrapper.getNewPosts('go', '1');
+        const posts: PostImpl[] = await hubScrapper.getNewPosts('go', null);
 
         console.log(posts);
     }
