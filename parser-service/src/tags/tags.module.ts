@@ -15,6 +15,10 @@ import { Tag, TagSchema } from './schemas/tag.schema';
                         name: 'tags-exchange',
                         type: 'direct',
                     },
+                    {
+                        name: 'notifications-exchange',
+                        type: 'direct',
+                    },
                 ],
                 uri: configService.get<string>('TAGS_QUEUE_URL'),
                 connectionInitOptions: { wait: false },
