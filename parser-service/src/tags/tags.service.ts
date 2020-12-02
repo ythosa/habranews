@@ -64,7 +64,7 @@ export class TagsService {
                 lastId,
             );
 
-            if (!posts.length) return; // no updates -> return
+            if (!posts.length) continue; // no updates -> watch next tag
 
             const notificationMessage: NotificationMessageImpl = {
                 tag: hub,
