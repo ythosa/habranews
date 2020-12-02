@@ -1,5 +1,5 @@
 export enum tagsEnum {
-    fsharp = 'f#',
+    fsharp = 'fsharp',
     openSource = 'open_source',
     programming = 'programming',
     dotNet = 'net',

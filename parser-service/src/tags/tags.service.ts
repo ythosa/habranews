@@ -45,32 +45,53 @@ export class TagsService {
         });
     }
 
-    // @Cron('0 * * * *')
-    @Cron('20 * * * * *')
+    @Cron('0 * * * *') // every hour
+    // @Cron('20 * * * * *')
     async handleCron() {
         this.logger.log('Starting parsing habr...');
         const hubScrapper = new HubScrapper();
 
         const hubs = await this.getAvailableTags();
         for (const hub of hubs.tags) {
-            const { postId: lastId } = await this.tagModel.findOne({ tag: hub })
-            const posts: PostImpl[] = await hubScrapper.getNewPosts(hub, lastId);
-            
-            if (posts.length) {
-                const notificationMessage: NotificationMessageImpl = {
-                    tag: hub,
-                    posts: posts,
-                };
-                // publish updates
-                this.amqpConnection.publish(
-                    'notifications-exchange',
-                    'notification-route',
-                    notificationMessage,
-                );
+            const post = await this.tagModel.findOne({
+                tag: hub,
+            });
+            const lastId = post.postId ?? null;
 
-                // update last id into db
-                this.tagModel.update({ tag: hub }, { postId: posts[0].postId });
-            }
+            this.logger.debug(`LastID of ${hub}: ${lastId}`);
+            const posts: PostImpl[] = await hubScrapper.getNewPosts(
+                hub,
+                lastId,
+            );
+
+            if (!posts.length) return;
+
+            const notificationMessage: NotificationMessageImpl = {
+                tag: hub,
+                posts: posts,
+            };
+            this.amqpConnection.publish(
+                // publish updates
+                'notifications-exchange',
+                'notification-route',
+                notificationMessage,
+            );
+
+            this.logger.log(
+                `I am sending updates with last post with id ${notificationMessage.posts[0].postId}.
+                Title: ${notificationMessage.posts[0].title}`,
+            );
+            await this.tagModel // update last id into db
+                .updateOne(
+                    { tag: hub },
+                    {
+                        tag: hub,
+                        link: posts[0].link,
+                        postId: posts[0].postId,
+                    },
+                    { upsert: true },
+                )
+                .exec();
         }
     }
 }

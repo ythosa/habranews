@@ -3,7 +3,6 @@ import Axios from 'axios';
 import { PostImpl } from '../interfaces/post.interface';
 import { UrlBuilder } from './url-builder';
 import { JSDOM } from 'jsdom';
-import { exit } from 'process';
 
 export class HubScrapper {
     private readonly logger = new Logger(HubScrapper.name);
@@ -42,7 +41,6 @@ export class HubScrapper {
                     postId: postId,
                     link: this.urlBuilder.getPostLink(postId),
                 });
-                console.log(parsedPosts[parsedPosts.length - 1]);
             }
         });
 
@@ -51,6 +49,7 @@ export class HubScrapper {
 
     public async getNewPosts(hub: string, lastId: number): Promise<PostImpl[]> {
         const hubUrl: string = this.urlBuilder.getHubUrl(hub);
+        this.logger.debug(`Getting all posts from URL: ${hubUrl}`);
         const allPosts: PostImpl[] = await this.getAllPosts(hubUrl);
 
         if (!lastId) {
@@ -59,7 +58,7 @@ export class HubScrapper {
 
         const newPosts: PostImpl[] = [];
         for (const p of allPosts) {
-            if (p.postId === lastId) {
+            if (p.postId == lastId) {
                 break;
             }
 
