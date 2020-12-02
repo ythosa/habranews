@@ -22,10 +22,14 @@ export class TagsService {
         };
     }
 
-    public async patchTags(msg: TagsImpl) {
-        const currentTags: string[] = (await this.tagModel.find({}).exec()).map(
+    private async getTrackedTags(): Promise<string[]> {
+        return (await this.tagModel.find({}).exec()).map(
             (tagSchema) => tagSchema.tag,
         );
+    }
+
+    public async patchTags(msg: TagsImpl) {
+        const currentTags: string[] = await this.getTrackedTags();
         const unstagedTags: string[] = msg.tags.filter(
             (tag) => !currentTags.includes(tag),
         );
@@ -43,8 +47,14 @@ export class TagsService {
     async handleCron() {
         this.logger.log('Starting parsing habr...');
         const hubScrapper = new HubScrapper();
-        const posts: PostImpl[] = await hubScrapper.getNewPosts('go', null);
 
-        console.log(posts);
+        const hubs = await this.getAvailableTags();
+        for (const hub of hubs.tags) {
+            const posts: PostImpl[] = await hubScrapper.getNewPosts(hub, null);
+            if (posts.length) {
+                // push to queue
+                // update last id into db
+            }
+        }
     }
 }
