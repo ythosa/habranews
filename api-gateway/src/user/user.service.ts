@@ -1,3 +1,4 @@
+import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { UserServiceImpl } from './interfaces/user-service.interface';
@@ -8,7 +9,10 @@ export class UserService {
 
     private userService: UserServiceImpl;
 
-    constructor(@Inject('USER_PACKAGE') private client: ClientGrpc) {}
+    constructor(
+        @Inject('USER_PACKAGE') private client: ClientGrpc,
+        private readonly amqpConnection: AmqpConnection,    
+    ) {}
 
     onModuleInit() {
         this.userService = this.client.getService<UserServiceImpl>(

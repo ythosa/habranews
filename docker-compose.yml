@@ -1,71 +1,71 @@
 version: '3.3'
 
 services:
-  # api-gateway:
-  #   build: ./api-gateway
-  #   container_name: api-gateway
-  #   command: npm run start
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./protobufs:/usr/src/protobufs
-  #   ports:
-  #     - "3001:3001"
-  #   networks:
-  #     - habranews
-  #   depends_on: 
-  #     - user-service
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    command: npm run start
+    restart: unless-stopped
+    volumes:
+      - ./protobufs:/usr/src/protobufs
+    ports:
+      - "3001:3001"
+    networks:
+      - habranews
+    depends_on: 
+      - user-service
 
-  # user-service:
-  #   build: ./user-service
-  #   container_name: user-service
-  #   command: npm run start
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./protobufs:/usr/src/protobufs
-  #   networks:
-  #     - habranews
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    command: npm run start
+    restart: unless-stopped
+    volumes:
+      - ./protobufs:/usr/src/protobufs
+    networks:
+      - habranews
 
-  # user-service-db:
-  #   container_name: user-service-db
-  #   image: postgres
-  #   env_file: 
-  #     - ./user-service-db/postgresql.env
-  #   volumes: 
-  #     - user-service-db-volume:/var/lib/postgresql/data
-  #   networks: 
-  #     - habranews
+  user-service-db:
+    container_name: user-service-db
+    image: postgres
+    env_file: 
+      - ./user-service-db/postgresql.env
+    volumes: 
+      - user-service-db-volume:/var/lib/postgresql/data
+    networks: 
+      - habranews
 
-  # auth-service:
-  #   build: ./auth-service
-  #   container_name: auth-service
-  #   command: npm run start
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./protobufs:/usr/src/protobufs
-  #   networks:
-  #     - habranews
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    command: npm run start
+    restart: unless-stopped
+    volumes:
+      - ./protobufs:/usr/src/protobufs
+    networks:
+      - habranews
 
-  # auth-service-db:
-  #   container_name: auth-service-db
-  #   image: redis:6.0.9-alpine
-  #   environment:
-  #    - REDIS_REPLICATION_MODE=master
-  #   volumes:
-  #     - auth-service-db-data-volume:/var/lib/redis
-  #     - auth-service-db-cfg-volume:/usr/local/etc/redis/redis.conf
-  #   networks: 
-  #     - habranews
+  auth-service-db:
+    container_name: auth-service-db
+    image: redis:6.0.9-alpine
+    environment:
+     - REDIS_REPLICATION_MODE=master
+    volumes:
+      - auth-service-db-data-volume:/var/lib/redis
+      - auth-service-db-cfg-volume:/usr/local/etc/redis/redis.conf
+    networks: 
+      - habranews
   
-  # tags-queue:
-  #   image: 'rabbitmq:3.6-management-alpine'
-  #   container_name: tags-queue
-  #   env_file: 
-  #     - ./tags-queue/rabbitmq.env
-  #   ports:
-  #     # - '5672:5672'
-  #     - '15672:15672' # HTTP management UI
-  #   networks: 
-  #     - habranews
+  tags-queue:
+    image: 'rabbitmq:3.6-management-alpine'
+    container_name: tags-queue
+    env_file: 
+      - ./tags-queue/rabbitmq.env
+    ports:
+      # - '5672:5672'
+      - '15672:15672' # HTTP management UI
+    networks: 
+      - habranews
 
   parser-service:
     build: ./parser-service
