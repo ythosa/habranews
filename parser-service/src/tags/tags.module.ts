@@ -13,7 +13,7 @@ import { Tag, TagSchema } from './schemas/tag.schema';
                 exchanges: [
                     {
                         name: 'tags-exchange',
-                        type: 'direct',
+                        type: 'topic',
                     },
                     {
                         name: 'notifications-exchange',

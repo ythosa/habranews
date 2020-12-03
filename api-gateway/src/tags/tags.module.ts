@@ -11,7 +11,7 @@ import { TagsService } from './tags.service';
           exchanges: [
               {
                   name: 'tags-exchange',
-                  type: 'direct',
+                  type: 'topic',
               },
               {
                   name: 'notifications-exchange',
