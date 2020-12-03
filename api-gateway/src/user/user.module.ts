@@ -1,3 +1,4 @@
+import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq/lib/rabbitmq.module';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
@@ -24,6 +25,23 @@ import { UserService } from './user.service';
                 inject: [ConfigService],
             },
         ]),
+        RabbitMQModule.forRootAsync(RabbitMQModule, {
+            useFactory: (configService: ConfigService) => ({
+                exchanges: [
+                    {
+                        name: 'tags-exchange',
+                        type: 'direct',
+                    },
+                    {
+                        name: 'notifications-exchange',
+                        type: 'direct',
+                    },
+                ],
+                uri: configService.get<string>('TAGS_QUEUE_URL'),
+                connectionInitOptions: { wait: false },
+            }),
+            inject: [ConfigService],
+        }),
     ],
     controllers: [UserController],
     providers: [UserService],

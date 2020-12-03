@@ -70,7 +70,7 @@ export class TagsService {
                 tag: hub,
                 posts: posts,
             };
-            this.amqpConnection.publish(
+            await this.amqpConnection.publish(
                 // publish updates
                 'notifications-exchange',
                 'notification-route',
