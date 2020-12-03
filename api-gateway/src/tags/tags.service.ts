@@ -1,5 +1,6 @@
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Injectable } from '@nestjs/common';
+import { randomInt } from 'crypto';
 import { TagsImpl } from 'src/user/interfaces/tags.interface';
 
 @Injectable()
@@ -10,6 +11,7 @@ export class TagsService {
         return await this.amqpConnection.request<TagsImpl>({
             exchange: 'tags-exchange',
             routingKey: 'rpc-route',
+            timeout: 100000,
         })
     }
 }

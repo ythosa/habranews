@@ -38,7 +38,7 @@ import { UserService } from './user.service';
                     },
                 ],
                 uri: configService.get<string>('TAGS_QUEUE_URL'),
-                connectionInitOptions: { wait: false },
+                // connectionInitOptions: { wait: false },
             }),
             inject: [ConfigService],
         }),

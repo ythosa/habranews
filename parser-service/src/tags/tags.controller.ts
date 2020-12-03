@@ -12,6 +12,7 @@ export class TagsController {
     @RabbitRPC({
         exchange: 'tags-exchange',
         routingKey: 'rpc-route',
+        queue: 'get-tags-queue',
     })
     public async getTagsHandler(): Promise<TagsImpl> {
         this.logger.log('Getting all available tags...');
@@ -22,10 +23,11 @@ export class TagsController {
     @RabbitRPC({
         exchange: 'tags-exchange',
         routingKey: 'subscribe-route',
+        queue: 'subscribe-queue',
     })
     public async patchTagsHandler(msg: TagsImpl) {
         this.logger.log(`Patching tags with data: ${JSON.stringify(msg)}`);
-
+        
         this.tagsService.patchTags(msg);
     }
 }
