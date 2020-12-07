@@ -1,4 +1,4 @@
-import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
+import { AmqpConnection, RabbitRPC } from '@golevelup/nestjs-rabbitmq';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose/dist/common/mongoose.decorators';
 import { Cron } from '@nestjs/schedule';
@@ -19,7 +19,13 @@ export class TagsService {
         @InjectModel(Tag.name) private readonly tagModel: Model<TagDocument>,
     ) {}
 
+    @RabbitRPC({
+        exchange: 'tags-exchange',
+        routingKey: 'rpc-route',
+        queue: 'get-tags-queue',
+    })
     public async getAvailableTags(): Promise<TagsImpl> {
+        this.logger.log('Getting all available tags...');
         return {
             tags: Object.values(tagsEnum),
         };

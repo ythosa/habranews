@@ -11,17 +11,6 @@ export class TagsController {
 
     @RabbitRPC({
         exchange: 'tags-exchange',
-        routingKey: 'rpc-route',
-        queue: 'get-tags-queue',
-    })
-    public async getTagsHandler(): Promise<TagsImpl> {
-        this.logger.log('Getting all available tags...');
-
-        return await this.tagsService.getAvailableTags();
-    }
-
-    @RabbitRPC({
-        exchange: 'tags-exchange',
         routingKey: 'subscribe-route',
         queue: 'subscribe-queue',
     })
