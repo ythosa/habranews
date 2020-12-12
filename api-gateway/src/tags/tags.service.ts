@@ -11,6 +11,14 @@ export class TagsService {
             exchange: 'tags-exchange',
             routingKey: 'rpc-route',
             timeout: 10000,
-        })
+        });
+    }
+
+    patchTags(tags: TagsImpl): void {
+        this.amqpConnection.publish(
+            'notifications-exchange',
+            'update-tags-route',
+            tags,
+        );
     }
 }

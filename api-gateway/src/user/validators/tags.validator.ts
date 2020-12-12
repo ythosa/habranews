@@ -3,16 +3,13 @@ import {
     ValidationArguments,
     ValidatorConstraintInterface,
 } from 'class-validator';
-import { TagsImpl } from '../interfaces/tags.interface';
+import { TagsService } from 'src/tags/tags.service';
 
 export class IsValidTags implements ValidatorConstraintInterface {
-    constructor(private readonly amqpConnection: AmqpConnection) {}
+    constructor(private readonly tagsService: TagsService) {}
 
     async validate(value: string[]): Promise<boolean> {
-        const { tags: validTags } = await this.amqpConnection.request<TagsImpl>({
-            exchange: 'tags-exchange',
-            routingKey: 'rpc-route',
-        })
+        const { tags: validTags } = await this.tagsService.getAvailableTags();
 
         return value.every((t) => {
             return validTags.includes(t);

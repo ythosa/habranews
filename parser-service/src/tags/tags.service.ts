@@ -37,6 +37,11 @@ export class TagsService {
         );
     }
 
+    @RabbitRPC({
+        exchange: 'notifications-exchange',
+        routingKey: 'update-tags-route',
+        queue: 'update-tags-queue',
+    })
     public async patchTags(msg: TagsImpl) {
         const currentTags: string[] = await this.getTrackedTags();
         const unstagedTags: string[] = msg.tags.filter(
@@ -84,7 +89,7 @@ export class TagsService {
             );
 
             this.logger.log(
-                `I am sending updates with last post with id ${notificationMessage.posts[0].postId}.
+                `Sending updates with last post with id ${notificationMessage.posts[0].postId}.
                 Title: ${notificationMessage.posts[0].title}`,
             );
             await this.tagModel // update last id into db

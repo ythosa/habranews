@@ -6,11 +6,6 @@ import { UserModule } from './user/user.module';
 import { TagsModule } from './tags/tags.module';
 
 @Module({
-    imports: [
-        configModule,
-        AuthModule,
-        UserModule,
-        TagsModule,
-    ],
+    imports: [configModule, AuthModule, UserModule, TagsModule],
 })
 export class AppModule {}

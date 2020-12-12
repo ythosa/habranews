@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join, resolve } from 'path';
+import { TagsService } from 'src/tags/tags.service';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
@@ -25,23 +26,7 @@ import { UserService } from './user.service';
                 inject: [ConfigService],
             },
         ]),
-        RabbitMQModule.forRootAsync(RabbitMQModule, {
-            useFactory: (configService: ConfigService) => ({
-                exchanges: [
-                    {
-                        name: 'tags-exchange',
-                        type: 'topic',
-                    },
-                    {
-                        name: 'notifications-exchange',
-                        type: 'direct',
-                    },
-                ],
-                uri: configService.get<string>('TAGS_QUEUE_URL'),
-                connectionInitOptions: { wait: false },
-            }),
-            inject: [ConfigService],
-        }),
+        TagsService,
     ],
     controllers: [UserController],
     providers: [UserService],

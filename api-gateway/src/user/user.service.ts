@@ -11,7 +11,7 @@ export class UserService {
 
     constructor(
         @Inject('USER_PACKAGE') private client: ClientGrpc,
-        private readonly amqpConnection: AmqpConnection,    
+        private readonly amqpConnection: AmqpConnection,
     ) {}
 
     onModuleInit() {
