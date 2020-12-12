@@ -10,7 +10,7 @@ export class AuthController {
 
     @Post('/signIn')
     async signIn(authCredentialsDTO: AuthCredentialsDto): Promise<TokensImpl> {
-        return;
+        return this.authService.signIn(authCredentialsDTO);
     }
 
     @Post('/signUp')
