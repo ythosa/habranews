@@ -1,10 +1,11 @@
-import { AmqpConnection } from '@golevelup/nestjs-rabbitmq/lib/amqp/connection';
 import {
     ValidationArguments,
+    ValidatorConstraint,
     ValidatorConstraintInterface,
 } from 'class-validator';
 import { TagsService } from 'src/tags/tags.service';
 
+@ValidatorConstraint({ name: 'TagsValidation', async: true })
 export class IsValidTags implements ValidatorConstraintInterface {
     constructor(private readonly tagsService: TagsService) {}
 
