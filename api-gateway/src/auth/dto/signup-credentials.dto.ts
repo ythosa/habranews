@@ -1,4 +1,4 @@
-import { IsEmail, IsHash, IsString, Matches, MaxLength, MinLength, Validate } from "class-validator";
+import { IsEmail, IsString, Matches, MaxLength, MinLength, Validate } from "class-validator";
 import { IsValidTags } from "src/user/validators/tags.validator";
 
 export class SignUpCredentialsDto {
