@@ -26,7 +26,23 @@ import { UserService } from './user.service';
                 inject: [ConfigService],
             },
         ]),
-        TagsService,
+        RabbitMQModule.forRootAsync(RabbitMQModule, {
+            useFactory: (configService: ConfigService) => ({
+                exchanges: [
+                    {
+                        name: 'tags-exchange',
+                        type: 'direct',
+                    },
+                    {
+                        name: 'notifications-exchange',
+                        type: 'direct',
+                    },
+                ],
+                uri: configService.get<string>('TAGS_QUEUE_URL'),
+                connectionInitOptions: { wait: false },
+            }),
+            inject: [ConfigService],
+        }),
     ],
     controllers: [UserController],
     providers: [UserService],
