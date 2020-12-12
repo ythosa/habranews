@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { TagsModule } from './tags/tags.module';
 import { QueueModule } from './queue/queue.module';
+import { ValidatorsModule } from './validators/validators.module';
 
 @Module({
     imports: [
@@ -13,6 +14,7 @@ import { QueueModule } from './queue/queue.module';
         UserModule,
         TagsModule,
         QueueModule,
+        ValidatorsModule,
     ],
 })
 export class AppModule {}

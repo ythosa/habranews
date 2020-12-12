@@ -5,7 +5,6 @@ import { GenerateTokensDto } from './dto/generate-token.dto';
 import { SignUpCredentialsDto } from './dto/signup-credentials.dto';
 import { AddUserDtoImpl } from './interfaces/add-user-dto.interface';
 import { AuthServiceImpl } from './interfaces/auth-service.interface';
-import { CryptPasswordDtoImpl } from './interfaces/crypt-password-dto.interface';
 import { CryptedPasswordImpl } from './interfaces/crypted-password.interface';
 import { TokensImpl } from './interfaces/tokens.interface';
 import { UserServiceImpl } from './interfaces/user-service.interface';
