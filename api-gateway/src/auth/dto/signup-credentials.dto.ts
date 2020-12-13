@@ -6,7 +6,7 @@ import {
     MinLength,
     Validate,
 } from 'class-validator';
-import { IsValidTags } from 'src/user/validators/tags.validator';
+import { IsValidTags } from 'src/validation/tags.validator';
 
 export class SignUpCredentialsDto {
     @IsEmail()

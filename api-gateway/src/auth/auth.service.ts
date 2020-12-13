@@ -30,13 +30,17 @@ export class AuthService {
     }
 
     async signIn(authCredentialsDto: AuthCredentialsDto): Promise<TokensImpl> {
-        return this.authService.generate(authCredentialsDto as GenerateTokensDto);
+        return this.authService.generate(
+            authCredentialsDto as GenerateTokensDto,
+        );
     }
 
     async signUp(authCredentialsDto: SignUpCredentialsDto): Promise<void> {
-        const cryptedPassword: CryptedPasswordImpl = await this.authService.cryptPassword({
-            password: authCredentialsDto.password,
-        });
+        const cryptedPassword: CryptedPasswordImpl = await this.authService.cryptPassword(
+            {
+                password: authCredentialsDto.password,
+            },
+        );
 
         const addUserDto: AddUserDtoImpl = {
             email: authCredentialsDto.email,
@@ -45,7 +49,7 @@ export class AuthService {
             name: authCredentialsDto.name,
             surname: authCredentialsDto.surname,
             tags: authCredentialsDto.tags,
-        }
+        };
         this.userService.addUser(addUserDto);
     }
 }

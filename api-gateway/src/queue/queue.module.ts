@@ -22,8 +22,6 @@ import { ConfigService } from '@nestjs/config';
             inject: [ConfigService],
         }),
     ],
-    exports: [
-        RabbitMQModule,
-    ],
+    exports: [RabbitMQModule],
 })
 export class QueueModule {}

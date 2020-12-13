@@ -2,7 +2,7 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join, resolve } from 'path';
-import { UserModule } from 'src/user/user.module';
+import { ValidationModule } from 'src/validation/validation.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
@@ -42,7 +42,7 @@ import { AuthService } from './auth.service';
                 inject: [ConfigService],
             },
         ]),
-        UserModule,
+        ValidationModule,
     ],
     controllers: [AuthController],
     providers: [AuthService],
