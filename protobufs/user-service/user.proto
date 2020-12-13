@@ -18,12 +18,13 @@ service UserService {
 }
 
 message User {
-  string email = 1;
-  string hashedPassword = 2;
-  string salt = 3;
-  string name = 4;
-  string surname = 5;
-  repeated string tags = 6;
+  string id = 1;
+  string email = 2;
+  string hashedPassword = 3;
+  string salt = 4;
+  string name = 5;
+  string surname = 6;
+  repeated string tags = 7;
 }
 message UserInformationForMail {
   string email = 1;

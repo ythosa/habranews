@@ -3,6 +3,7 @@ import {
     CACHE_MANAGER,
     Inject,
     Injectable,
+    Logger,
 } from '@nestjs/common';
 import { Cache } from 'cache-manager';
 import { CryptPasswordDto } from './dto/crypt-password.dto';
@@ -21,6 +22,8 @@ import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
 export class TokenService {
+    private readonly logger = new Logger(TokenService.name);
+
     private userService: UserServiceImpl;
 
     constructor(
@@ -44,6 +47,9 @@ export class TokenService {
         const user = await this.userService
             .getUserByEmail({ email })
             .toPromise();
+
+        this.logger.log(`Got user from user-service: ${JSON.stringify(user)}`);
+
         if (!user) {
             throw new BadRequestException('Invalid email or password');
         }
@@ -95,8 +101,9 @@ export class TokenService {
     async cryptPassword(
         cryptPasswordDto: CryptPasswordDto,
     ): Promise<CryptedPasswordImpl> {
+        const saltRounds = this.configService.get<string>('PASSWORD_SALT_ROUNDS');
         const salt = await bcrypt.genSalt(
-            this.configService.get<number>('PASSWORD_SALT_ROUNDS'),
+            Number.parseInt(saltRounds)
         );
         const hashedPassword = await bcrypt.hash(
             cryptPasswordDto.password,

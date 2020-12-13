@@ -5,7 +5,7 @@ export class AddUserDto {
     email: string;
 
     @IsString()
-    hashedPasword: string;
+    hashedPassword: string;
 
     @IsString()
     salt: string;

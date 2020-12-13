@@ -1,6 +1,6 @@
 export interface AddUserDtoImpl {
     email: string;
-    hashedPasword: string;
+    hashedPassword: string;
     salt: string;
     name: string;
     surname: string;

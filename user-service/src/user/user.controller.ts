@@ -1,4 +1,4 @@
-import { Controller, Logger } from '@nestjs/common';
+import { Body, Controller, Logger, ValidationPipe } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { AddUserDto } from './dto/add-user.dto';
 import { UserService } from './user.service';
@@ -20,7 +20,7 @@ export class UserController implements UserServiceImpl {
     constructor(private readonly userService: UserService) {}
 
     @GrpcMethod('UserService')
-    async addUser(addUserDto: AddUserDto): Promise<void> {
+    async addUser(@Body(ValidationPipe) addUserDto: AddUserDto): Promise<void> {
         this.logger.log(`Adding user with data: ${JSON.stringify(addUserDto)}`);
 
         return this.userService.addUser(addUserDto);
@@ -86,7 +86,7 @@ export class UserController implements UserServiceImpl {
 
     @GrpcMethod('UserService')
     async getUserByEmail(
-        getUserByEmailDto: GetUserByEmailDto,
+        @Body(ValidationPipe) getUserByEmailDto: GetUserByEmailDto,
     ): Promise<UserImpl> {
         this.logger.log(
             `Getting user by email with data: ${JSON.stringify(
