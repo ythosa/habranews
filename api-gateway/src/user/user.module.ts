@@ -4,8 +4,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join, resolve } from 'path';
 import { QueueModule } from 'src/queue/queue.module';
 import { TagsModule } from 'src/tags/tags.module';
-import { IsValidTags } from 'src/validators/tags.validator';
-import { ValidatorsModule } from 'src/validators/validators.module';
+import { IsValidTags } from 'src/user/validators/tags.validator';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
@@ -30,9 +29,9 @@ import { UserService } from './user.service';
         ]),
         QueueModule,
         TagsModule,
-        ValidatorsModule,
     ],
     controllers: [UserController],
     providers: [UserService, IsValidTags],
+    exports: [IsValidTags],
 })
 export class UserModule {}

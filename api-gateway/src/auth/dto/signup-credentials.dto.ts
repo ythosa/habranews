@@ -1,10 +1,17 @@
-import { IsEmail, IsString, Matches, MaxLength, MinLength, Validate } from "class-validator";
-import { IsValidTags } from "src/validators/tags.validator";
+import {
+    IsEmail,
+    IsString,
+    Matches,
+    MaxLength,
+    MinLength,
+    Validate,
+} from 'class-validator';
+import { IsValidTags } from 'src/user/validators/tags.validator';
 
 export class SignUpCredentialsDto {
     @IsEmail()
     email: string;
-    
+
     @IsString()
     @MinLength(8)
     @MaxLength(20)
