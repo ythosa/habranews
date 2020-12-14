@@ -19,6 +19,6 @@ async function bootstrap() {
         },
     });
 
-    await app.listen(() => logger.log('User Service is started!'));
+    await app.listen(() => logger.log('Auth Service is started!'));
 }
 bootstrap();

@@ -1,9 +1,10 @@
-import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq/lib/rabbitmq.module';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join, resolve } from 'path';
-import { TagsService } from 'src/tags/tags.service';
+import { QueueModule } from 'src/queue/queue.module';
+import { TagsModule } from 'src/tags/tags.module';
+import { ValidationModule } from 'src/validation/validation.module';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
@@ -26,7 +27,9 @@ import { UserService } from './user.service';
                 inject: [ConfigService],
             },
         ]),
-        TagsService,
+        QueueModule,
+        TagsModule,
+        ValidationModule,
     ],
     controllers: [UserController],
     providers: [UserService],

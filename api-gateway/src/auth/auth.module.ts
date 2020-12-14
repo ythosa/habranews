@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join, resolve } from 'path';
+import { ValidationModule } from 'src/validation/validation.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
@@ -24,6 +25,24 @@ import { AuthService } from './auth.service';
                 inject: [ConfigService],
             },
         ]),
+        ClientsModule.registerAsync([
+            {
+                name: 'USER_PACKAGE',
+                useFactory: (configService: ConfigService) => ({
+                    transport: Transport.GRPC,
+                    options: {
+                        package: 'user',
+                        protoPath: join(
+                            resolve(process.cwd(), '..'),
+                            'protobufs/user-service/user.proto',
+                        ),
+                        url: configService.get<string>('USER_SERVICE_URL'),
+                    },
+                }),
+                inject: [ConfigService],
+            },
+        ]),
+        ValidationModule,
     ],
     controllers: [AuthController],
     providers: [AuthService],

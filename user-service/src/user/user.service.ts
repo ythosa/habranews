@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AddUserDto } from './dto/add-user.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
@@ -11,17 +11,20 @@ import { UserImpl } from './interfaces/user.interface';
 import { UserInformationForMailImpl } from './interfaces/user-information-for-mail';
 import { UserRepository } from './user.repository';
 import { GetUserByEmailDto } from './dto/get-user-by-email.dto';
-import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
+    private readonly logger = new Logger(UserService.name);
+
     constructor(
         @InjectRepository(UserRepository)
         private readonly userRepository: UserRepository,
     ) {}
 
     async addUser(addUserDto: AddUserDto): Promise<void> {
-        this.userRepository.save([addUserDto]);
+        const result = await this.userRepository.insert(addUserDto);
+
+        this.logger.debug(result);
     }
 
     async changePassword(changePasswordDto: ChangePasswordDto): Promise<void> {
@@ -91,17 +94,24 @@ export class UserService {
         return usersInfo;
     }
 
-    async getUserByEmail(getUserByEmailDto: GetUserByEmailDto): Promise<UserImpl> {
+    async getUserByEmail(
+        getUserByEmailDto: GetUserByEmailDto,
+    ): Promise<UserImpl> {
+        this.logger.log('Getting user by email');
+        this.logger.log(JSON.stringify(getUserByEmailDto));
+
         const user = await this.userRepository.findOne({
             where: {
                 email: getUserByEmailDto.email,
-            }
-        })
+            },
+        });
 
         if (!user) {
-            new BadRequestException('Invalid email');
+            throw new BadRequestException('There is no user with such email');
         }
 
-        return user
+        this.logger.debug(`Got user from DB: ${JSON.stringify(user)}`);
+
+        return user;
     }
 }

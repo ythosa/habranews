@@ -9,10 +9,7 @@ export class UserService {
 
     private userService: UserServiceImpl;
 
-    constructor(
-        @Inject('USER_PACKAGE') private client: ClientGrpc,
-        private readonly amqpConnection: AmqpConnection,
-    ) {}
+    constructor(@Inject('USER_PACKAGE') private client: ClientGrpc) {}
 
     onModuleInit() {
         this.userService = this.client.getService<UserServiceImpl>(
