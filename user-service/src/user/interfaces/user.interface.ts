@@ -1,5 +1,5 @@
 export interface UserImpl {
-    id: number;
+    id: string;
     email: string;
     hashedPassword: string;
     salt: string;

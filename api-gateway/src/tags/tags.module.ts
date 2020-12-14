@@ -1,4 +1,4 @@
-import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
+import { AmqpConnection, RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TagsController } from './tags.controller';
@@ -25,7 +25,7 @@ import { TagsService } from './tags.service';
         }),
     ],
     controllers: [TagsController],
-    providers: [TagsService],
+    providers: [TagsService, AmqpConnection],
     exports: [TagsService],
 })
 export class TagsModule {}

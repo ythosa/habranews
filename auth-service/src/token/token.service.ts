@@ -56,12 +56,12 @@ export class TokenService {
             throw new BadRequestException('Invalid email or password');
         }
 
-        const payload = { id: user.id };
+        const payload = { id: Number.parseInt(user.id) };
         const { accessToken, refreshToken } = this.generateTokensByPayload(
             payload,
         );
 
-        this.saveRefreshToken(user.id, refreshToken);
+        this.saveRefreshToken(Number.parseInt(user.id), refreshToken);
 
         return { accessToken, refreshToken };
     }
@@ -89,7 +89,9 @@ export class TokenService {
             }
         );
         
-        return payload as UserIdImpl;
+        return {
+            id: payload.id.toString(),
+        };
     }
 
     async cryptPassword(

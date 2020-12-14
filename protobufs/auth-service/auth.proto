@@ -13,7 +13,7 @@ message VerifyByAccessTokenDto {
     string accessToken = 1;
 }
 message UserId {
-    int32 userId = 1;
+    string userId = 1;
 }
 
 message GenerateTokensDto {

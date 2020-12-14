@@ -18,12 +18,13 @@ service UserService {
 }
 
 message User {
-  string email = 1;
-  string hashedPassword = 2;
-  string salt = 3;
-  string name = 4;
-  string surname = 5;
-  repeated string tags = 6;
+  string id = 1;
+  string email = 2;
+  string hashedPassword = 3;
+  string salt = 4;
+  string name = 5;
+  string surname = 6;
+  repeated string tags = 7;
 }
 message UserInformationForMail {
   string email = 1;
@@ -35,26 +36,26 @@ message UsersInformationForMail {
 }
 
 message ChangePasswordDto {
-  int32 userId = 1;
+  string userId = 1;
   string hashedPassword = 2;
   string salt = 3;
 }
 message PatchEmailDto {
-  int32 userId = 1;
+  string userId = 1;
   string email = 2;
 }
 message PatchBioDto {
-  int32 userId = 1;
+  string userId = 1;
   string name = 2;
   string surname = 3;
 }
 message PatchTagsDto {
-  int32 userId = 1;
+  string userId = 1;
   repeated string tags = 2;
 }
 
 message GetUserByIdDto {
-  int32 id = 1;
+  string id = 1;
 }
 message GetUsersByTagDto {
   string tag = 1;
