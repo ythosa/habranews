@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose/dist/mongoose.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { configModule } from './configure.root';
 import { TagsModule } from './tags/tags.module';
+import { CacheWorkerModule } from './cache-worker/cache-worker.module';
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import { TagsModule } from './tags/tags.module';
             inject: [ConfigService],
         }),
         ScheduleModule.forRoot(),
+        CacheWorkerModule,
     ],
     controllers: [],
     providers: [],
