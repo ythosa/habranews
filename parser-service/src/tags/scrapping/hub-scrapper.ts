@@ -3,16 +3,13 @@ import Axios from 'axios';
 import { PostImpl } from '../interfaces/post.interface';
 import { UrlBuilder } from './url-builder';
 import { JSDOM } from 'jsdom';
-import { Cache } from 'cache-manager';
-import * as bcrypt from 'bcrypt';
+import { CacheWorkerService } from 'src/cache-worker/cache-worker.service';
 
 export class HubScrapper {
     private readonly logger = new Logger(HubScrapper.name);
     private readonly urlBuilder: UrlBuilder;
 
-    constructor(
-        private readonly hubsPagesCache: Cache,
-    ) {
+    constructor(private readonly cacheWorkerService: CacheWorkerService) {
         this.urlBuilder = new UrlBuilder();
     }
 
@@ -22,12 +19,15 @@ export class HubScrapper {
 
         const { data: rowHtml } = await Axios.get(hubUrl);
 
-        const isPageUpdated = await this.isUpdated(hub, rowHtml);
+        const isPageUpdated = await this.cacheWorkerService.isUpdated(
+            hub,
+            rowHtml,
+        );
         if (!isPageUpdated) {
             return []; // no updates -> return empty array
         }
 
-        await this.saveHashOfPage(hub, rowHtml); // save updated hash of page
+        await this.cacheWorkerService.saveHashOfPage(hub, rowHtml); // save updated hash of page
         const allPosts: PostImpl[] = this.getAllPosts(hubUrl);
 
         if (!lastId) {
@@ -78,16 +78,5 @@ export class HubScrapper {
 
     private isPost(post): boolean {
         return post.id.match(/post_\d+/);
-    }
-
-    private async isUpdated(hub: string, body: string): Promise<boolean> {
-        const saved = await this.hubsPagesCache.get<string>(hub);
-
-        return bcrypt.compare(body, saved);
-    }
-
-    private async saveHashOfPage(hub: string, body: string): Promise<void> {
-        const hash = await bcrypt.hash(body);
-        this.hubsPagesCache.set(hub, hash);
     }
 }

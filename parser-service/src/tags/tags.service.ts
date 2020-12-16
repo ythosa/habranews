@@ -1,15 +1,15 @@
 import { AmqpConnection, RabbitRPC } from '@golevelup/nestjs-rabbitmq';
-import { CACHE_MANAGER, Inject, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose/dist/common/mongoose.decorators';
 import { Cron } from '@nestjs/schedule';
 import { Model } from 'mongoose';
+import { CacheWorkerService } from 'src/cache-worker/cache-worker.service';
 import { tagsEnum } from './enums/tags.enum';
 import { NotificationMessageImpl } from './interfaces/notification-message.interface';
 import { PostImpl } from './interfaces/post.interface';
 import { TagsImpl } from './interfaces/tags.interface';
 import { Tag, TagDocument } from './schemas/tag.schema';
 import { HubScrapper } from './scrapping/hub-scrapper';
-import { Cache } from 'cache-manager';
 
 @Injectable()
 export class TagsService {
@@ -17,7 +17,7 @@ export class TagsService {
 
     constructor(
         private readonly amqpConnection: AmqpConnection,
-        @Inject(CACHE_MANAGER) private hubsPagesCache: Cache,
+        private readonly cacheWorkerService: CacheWorkerService,
         @InjectModel(Tag.name) private readonly tagModel: Model<TagDocument>,
     ) {}
 
@@ -62,7 +62,7 @@ export class TagsService {
     // @Cron('20 * * * * *')
     async handleCron() {
         this.logger.log('Starting parsing habr...');
-        const hubScrapper = new HubScrapper(this.hubsPagesCache);
+        const hubScrapper = new HubScrapper(this.cacheWorkerService);
 
         const hubs = await this.getTrackedTags();
         for (const hub of hubs) {
