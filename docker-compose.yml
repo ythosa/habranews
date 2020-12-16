@@ -83,11 +83,24 @@ services:
     networks: 
       - habranews
 
+  parser-service-cache:
+    container_name: parser-service-cache
+    image: redis:6.0.9-alpine
+    environment:
+     - REDIS_REPLICATION_MODE=master
+    volumes:
+      - parser-service-cache-volume:/var/lib/redis
+      - parser-service-cache-cfg-volume:/usr/local/etc/redis/redis.conf
+    networks: 
+      - habranews
+
 volumes:
   parser-service-db:
   user-service-db-volume:
   auth-service-db-data-volume:
   auth-service-db-cfg-volume:
+  parser-service-cache-volume:
+  parser-service-cache-cfg-volume:
 
 networks:
   habranews:

@@ -117,7 +117,7 @@ export class TokenService {
 
     private saveRefreshToken(id: number, refreshToken: string): void {
         this.refreshTokensManager.set(id.toString(), refreshToken, {
-            ttl: this.configService.get<number>('TOKENDB_TTL'),
+            ttl: this.configService.get<number>('TOKENSDB_TTL'),
         });
     }
 

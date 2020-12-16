@@ -30,6 +30,7 @@
     "@nestjs/schedule": "^0.4.1",
     "@types/jsdom": "^16.2.5",
     "axios": "^0.21.0",
+    "cache-manager-redis-store": "^2.0.0",
     "jsdom": "^16.4.0",
     "kafkajs": "^1.15.0",
     "mongoose": "^5.10.17",
