@@ -36,6 +36,6 @@ export class RefreshJwtStrategy extends PassportStrategy(
             throw new UnauthorizedException('Bad refresh token');
         }
 
-        return { id };
+        return { id: id.toString() };
     }
 }

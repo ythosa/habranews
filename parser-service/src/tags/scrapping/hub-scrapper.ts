@@ -24,6 +24,7 @@ export class HubScrapper {
             rowHtml,
         );
         if (!isPageUpdated) {
+            this.logger.debug('Compared with cache -> no updates')
             return []; // no updates -> return empty array
         }
 

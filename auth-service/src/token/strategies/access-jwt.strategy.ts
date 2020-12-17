@@ -44,6 +44,6 @@ export class AccessJwtStrategy extends PassportStrategy(
             throw new UnauthorizedException();
         }
 
-        return { id };
+        return { id: id.toString() };
     }
 }
